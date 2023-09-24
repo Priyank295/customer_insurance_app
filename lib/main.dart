@@ -1,11 +1,16 @@
+import 'package:customer_insurance_app/models/automative.dart';
+import 'package:customer_insurance_app/models/home.dart';
+import 'package:customer_insurance_app/models/user.dart';
 import 'package:customer_insurance_app/screens/LifeInsurancePlanScreens/lifeInsurancePlansScreen.dart';
 import 'package:customer_insurance_app/screens/accidentInsurancePlanScreens/accidentInsurancePlansScreen.dart';
 import 'package:customer_insurance_app/screens/bottomNavigationBarScreens.dart';
 import 'package:customer_insurance_app/screens/cartScreens/applyPromoScreen.dart';
 import 'package:customer_insurance_app/screens/cartScreens/cartScreen1.dart';
+import 'package:customer_insurance_app/screens/editProfileScreen.dart';
 import 'package:customer_insurance_app/screens/languageSelectionScreen.dart';
 import 'package:customer_insurance_app/screens/marineInsurancePlanScreens/marineInsuranceScreen2.dart';
 import 'package:customer_insurance_app/screens/myClaimsScreen.dart';
+import 'package:customer_insurance_app/screens/registerScreen.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/conditions_screen.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/create_password_screen.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/finish_register_screen.dart';
@@ -65,12 +70,36 @@ import 'screens/travelInsurancePlanScreens.dart/travelInsuranceScreen3.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
+
   await prefs.setBool('showTour', true);
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String token = "";
+
+  Future<void> getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('userToken') != null) {
+      token = await prefs.getString('userToken')!;
+      print(token);
+    }
+  }
+
+  @override
+  void initState() {
+    getToken();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,17 +108,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)),
-      home: const SplashScreen(),
+      home: token.isNotEmpty
+          ? BottomNavigationBarScreens()
+          : SignUpRegisterScreen(),
       // initialRoute: LanguageSelectionScreen.languageSelectionScreen,
       routes: {
         BottomNavigationBarScreens.bottomNavScreens: (context) =>
             const BottomNavigationBarScreens(),
         HomeInsuranceScreen1.homeInsuranceRoute: (context) =>
             const HomeInsuranceScreen1(),
-        HomeInsuranceScreen2.HomeScreen2: (context) =>
-            const HomeInsuranceScreen2(),
-        HomeInsuranceScreen3.HomeScreen3: (context) =>
-            const HomeInsuranceScreen3(),
+
         HomeInsurancePlansScreen.HomePlansScreen: (context) =>
             const HomeInsurancePlansScreen(),
         HomeInsuranceFormScreen1.HomeForm1: (context) =>
@@ -100,12 +128,7 @@ class MyApp extends StatelessWidget {
         MyPoliciesScreen.myPoliciesRoute: (context) => const MyPoliciesScreen(),
         MedicalInsuranceScreen1.medialInsuranceScreen1: (context) =>
             const MedicalInsuranceScreen1(),
-        MedicalInsuranceScreen2IfFamily.MedicalScreen2: (context) =>
-            const MedicalInsuranceScreen2IfFamily(),
-        MedicalInsuranceScreen3.MedicalScreen3: (context) =>
-            const MedicalInsuranceScreen3(),
-        MedicalInsuranceScreen4.MedicalScreen4: (context) =>
-            const MedicalInsuranceScreen4(),
+
         MedicalInsurancePlansScreen.MedicalPlansScreen: (contexy) =>
             const MedicalInsurancePlansScreen(),
         MedicalInsuranceFormScreen1.MedicalForm1: (context) =>
@@ -114,7 +137,7 @@ class MyApp extends StatelessWidget {
             const MedicalInsuranceFormScreen2(),
         AccidentScreen1.accidentInsurancePlan: (context) =>
             const AccidentScreen1(),
-        AccidentScreen2.accidentScreen2: (context) => const AccidentScreen2(),
+        // AccidentScreen2.accidentScreen2: (context) =>  AccidentScreen2(),
         AccidentInsurancePlansScreen.AccidentPlansScreen: (context) =>
             const AccidentInsurancePlansScreen(),
         LifeInsuranceScreen1.lifeInsurancePlan: (context) =>
@@ -139,16 +162,12 @@ class MyApp extends StatelessWidget {
             const TravelInsurancePlansScreen(),
         MarineInsuranceScreen1.marineScreen1: (context) =>
             const MarineInsuranceScreen1(),
-        MarineInsuranceScreen2.marineScreen2: (context) =>
-            const MarineInsuranceScreen2(),
-        MarineInsuranceScreen3.marineScreen3: (context) =>
-            const MarineInsuranceScreen3(),
+
         MarineInsurancePlansScreen.marinePlansScreen: (context) =>
             const MarineInsurancePlansScreen(),
         PetInsuranceScreen1.petScreen1: (context) =>
             const PetInsuranceScreen1(),
-        PetInsuranceScreen2.petScreen2: (context) =>
-            const PetInsuranceScreen2(),
+
         PetInsurancePlansScreen.petPlansScreen: (context) =>
             const PetInsurancePlansScreen(),
         IllnessInsuranceScreen1.illnessScreen1: (context) =>
@@ -161,10 +180,7 @@ class MyApp extends StatelessWidget {
             const IllnessInsurancePlansScreen(),
         AutomativeInsuranceScreen1.automativeScreen1: (context) =>
             const AutomativeInsuranceScreen1(),
-        AutomativeInsuranceScreen2.automativeScreen2: (context) =>
-            const AutomativeInsuranceScreen2(),
-        AutomativeInsuranceScreen3.automativeScreen3: (context) =>
-            const AutomativeInsuranceScreen3(),
+
         AutomativeInsurancePlansScreen.automativePlansScreen: (context) =>
             const AutomativeInsurancePlansScreen(),
         OfficeInsuranceScreen1.officeScreen1: (context) =>
@@ -175,10 +191,10 @@ class MyApp extends StatelessWidget {
             const OfficeInsuranceScreen3(),
         OfficeInsurancePlansScreen.officePlansScreen: (context) =>
             const OfficeInsurancePlansScreen(),
-        ConditionsScreen.conditionsScreen: (context) =>
-            const ConditionsScreen(),
-        CreatePasswordScreen.createPasswordScreen: (context) =>
-            const CreatePasswordScreen(),
+        // ConditionsScreen.conditionsScreen: (context) =>
+        //      ConditionsScreen(),
+        // CreatePasswordScreen.createPasswordScreen: (context) =>
+        //      CreatePasswordScreen(),
       },
     );
   }

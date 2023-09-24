@@ -1,3 +1,5 @@
+import 'package:customer_insurance_app/models/marine.dart';
+import 'package:customer_insurance_app/screens/marineInsurancePlanScreens/marineInsuranceScreen2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +34,11 @@ class _MarineInsuranceScreen1State extends State<MarineInsuranceScreen1> {
           child: InkWell(
               onTap: () {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/marineScreen2");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctx) => MarineInsuranceScreen2(
+                              Marine(mobileNo: _phone.text))));
                 } else {
                   setState(() {
                     allValidate = false;

@@ -9,7 +9,8 @@ import '../../widgets/mainBtn.dart';
 import '../bottomNavigationBarScreens.dart';
 
 class SignUpOtpScreen extends StatefulWidget {
-  const SignUpOtpScreen({super.key});
+  String phone;
+  SignUpOtpScreen(this.phone);
 
   @override
   State<SignUpOtpScreen> createState() => _SignUpOtpScreenState();
@@ -33,7 +34,7 @@ class _SignUpOtpScreenState extends State<SignUpOtpScreen> {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (ctx) => const SignUpProfileScreen()),
+                        builder: (ctx) => SignUpProfileScreen(widget.phone)),
                     (route) => false);
               },
               child: MainButton(context, "Next"))),
@@ -180,7 +181,7 @@ class _SignUpOtpScreenState extends State<SignUpOtpScreen> {
                         height: 20,
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 16),
+                        margin: EdgeInsets.symmetric(horizontal: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

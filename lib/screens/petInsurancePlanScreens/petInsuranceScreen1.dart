@@ -1,4 +1,5 @@
 import 'package:customer_insurance_app/common/colors.dart';
+import 'package:customer_insurance_app/screens/petInsurancePlanScreens/petInsuranceScreen2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/bottom_nav_button.dart';
 import '../../widgets/customAppbar.dart';
 import '../../widgets/customRadioButton.dart';
+import '../../models/pet.dart';
 
 class PetInsuranceScreen1 extends StatefulWidget {
   static const String petScreen1 = "/petScreen1";
@@ -34,12 +36,40 @@ class _PetInsuranceScreen1State extends State<PetInsuranceScreen1> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      bottomNavigationBar: GestureDetector(
-          onTap: () {
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (ctx) => LifeInsuranceScreen2()));
-          },
-          child: BottomNavOneButton(context, "Next", "/petScreen2")),
+      bottomNavigationBar: Container(
+          color: Colors.white,
+          margin: EdgeInsets.only(bottom: 33, top: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 26.5),
+          child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) =>
+                            PetInsuranceScreen2(Pet(petType: radioData))));
+              },
+              child: Container(
+                // margin: EdgeInsets.symmetric(horizontal: 26.5, vertical: 33),
+                width: MediaQuery.of(context).size.width,
+                height: 55,
+                decoration: ShapeDecoration(
+                  gradient: AppColors.primaryGradient,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    "Next",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.nunito(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ))),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: SafeArea(

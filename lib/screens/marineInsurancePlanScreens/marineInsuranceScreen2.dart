@@ -1,13 +1,17 @@
+import 'package:customer_insurance_app/screens/marineInsurancePlanScreens/marineInsuranceScreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../common/colors.dart';
+import '../../models/marine.dart';
 import '../../widgets/CustomAppbar.dart';
 import '../../widgets/bottom_nav_button.dart';
 
 class MarineInsuranceScreen2 extends StatefulWidget {
   static const String marineScreen2 = "/marineScreen2";
-  const MarineInsuranceScreen2({super.key});
+  final Marine marine;
+  MarineInsuranceScreen2(this.marine);
 
   @override
   State<MarineInsuranceScreen2> createState() => _MarineInsuranceScreen2State();
@@ -22,8 +26,45 @@ class _MarineInsuranceScreen2State extends State<MarineInsuranceScreen2> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      bottomNavigationBar:
-          BottomNavOneButton(context, "Next", "/marineScreen3"),
+      bottomNavigationBar: Container(
+          color: Colors.white,
+          margin: EdgeInsets.only(bottom: 33, top: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 26.5),
+          child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => MarineInsuranceScreen3(
+                      Marine(
+                          mobileNo: widget.marine.mobileNo,
+                          transportation: "yes"),
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                // margin: EdgeInsets.symmetric(horizontal: 26.5, vertical: 33),
+                width: MediaQuery.of(context).size.width,
+                height: 55,
+                decoration: ShapeDecoration(
+                  gradient: AppColors.primaryGradient,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    "Next",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.nunito(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ))),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(

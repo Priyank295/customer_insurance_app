@@ -1,11 +1,17 @@
+import 'package:customer_insurance_app/screens/signUpScreens/create_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../common/colors.dart';
+import '../../models/user.dart';
 import '../../widgets/bottom_nav_button.dart';
 
 class ConditionsScreen extends StatefulWidget {
   static const conditionsScreen = '/conditionsScreen';
-  const ConditionsScreen({super.key});
+  final User user;
+
+  ConditionsScreen(this.user);
 
   @override
   State<ConditionsScreen> createState() => _ConditionsScreenState();
@@ -19,8 +25,40 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar:
-          BottomNavOneButton(context, "I Agree", "/createPasswordScreen"),
+      bottomNavigationBar: Container(
+          color: Colors.white,
+          margin: EdgeInsets.only(bottom: 33, top: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 26.5),
+          child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) =>
+                            CreatePasswordScreen(user: widget.user)));
+              },
+              child: Container(
+                // margin: EdgeInsets.symmetric(horizontal: 26.5, vertical: 33),
+                width: MediaQuery.of(context).size.width,
+                height: 55,
+                decoration: ShapeDecoration(
+                  gradient: AppColors.primaryGradient,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    "I Agree",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.nunito(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ))),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(

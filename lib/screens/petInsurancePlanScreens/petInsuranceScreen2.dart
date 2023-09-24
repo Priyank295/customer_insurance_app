@@ -1,14 +1,18 @@
+import 'package:customer_insurance_app/database/apiIntegration.dart';
+import 'package:customer_insurance_app/screens/petInsurancePlanScreens/petInsuranceFormScreen1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/colors.dart';
+import '../../models/pet.dart';
 import '../../widgets/bottom_nav_button.dart';
 import '../../widgets/customTextField.dart';
 
 class PetInsuranceScreen2 extends StatefulWidget {
+  final Pet pet;
   static const String petScreen2 = "/petScreen2";
-  const PetInsuranceScreen2({super.key});
+  PetInsuranceScreen2(this.pet);
 
   @override
   State<PetInsuranceScreen2> createState() => _PetInsuranceScreen2State();
@@ -140,7 +144,18 @@ class _PetInsuranceScreen2State extends State<PetInsuranceScreen2> {
               child: InkWell(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, "/petPlansScreen");
+                    PetInsuranceData(Pet(
+                        petType: widget.pet.petType,
+                        ownerName: _owner.text,
+                        petName: _pet.text,
+                        petAge: _age.text,
+                        gender: _gender.text,
+                        color: _color.text,
+                        priConditions: _conditions.text));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => PetInsuranceFormScreen1()));
                   } else {
                     setState(() {
                       allValidate = false;

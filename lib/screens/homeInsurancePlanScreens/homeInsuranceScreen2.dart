@@ -1,3 +1,4 @@
+import 'package:customer_insurance_app/screens/homeInsurancePlanScreens/homeInsuranceScreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,13 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../common/colors.dart';
+import '../../models/home.dart';
 import '../../widgets/customAppbar.dart';
 import '../../widgets/customTextField.dart';
 import '../../widgets/mainBtn.dart';
 
 class HomeInsuranceScreen2 extends StatefulWidget {
   static const HomeScreen2 = "/homeScreen2";
-  const HomeInsuranceScreen2({super.key});
+  final Home home;
+
+  HomeInsuranceScreen2({required this.home});
 
   @override
   State<HomeInsuranceScreen2> createState() => _HomeInsuranceScreen2State();
@@ -103,7 +107,42 @@ class _HomeInsuranceScreen2State extends State<HomeInsuranceScreen2> {
           child: InkWell(
               onTap: () {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/homeScreen3");
+                  // final data = Home(
+                  //     fname: widget.fname,
+                  //     nationality: widget.nationality,
+                  //     nationalId: widget.nationalId,
+                  //     coverage: widget.coverage,
+                  //     category: widget.category,
+                  //     sizeofvilla: widget.sizeofvilla,
+                  //     location: widget.location,
+                  //     nooffloors: _floor.text,
+                  //     noofrooms: _room.text,
+                  //     homecategory: _category.text,
+                  //     effectivedate: _effective.text,
+                  //     expirydate: _expiry.text,
+                  //     limit: _limit.text);
+                  // Map<String, dynamic> map = data.toJson();
+
+                  // print(map);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctx) => HomeInsuranceScreen3(
+                                home: Home(
+                                    fname: widget.home.fname,
+                                    nationality: widget.home.nationality,
+                                    nationalId: widget.home.nationalId,
+                                    coverage: widget.home.coverage,
+                                    category: widget.home.category,
+                                    sizeofvilla: widget.home.sizeofvilla,
+                                    location: widget.home.location,
+                                    nooffloors: int.parse(_floor.text),
+                                    noofrooms: int.parse(_room.text),
+                                    homecategory: _category.text,
+                                    effectivedate: _effective.text,
+                                    expirydate: _expiry.text,
+                                    limit: int.parse(_limit.text)),
+                              )));
                 } else {
                   setState(() {
                     allValidate = false;

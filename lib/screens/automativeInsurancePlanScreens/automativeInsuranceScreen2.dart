@@ -1,13 +1,17 @@
+import 'package:customer_insurance_app/screens/automativeInsurancePlanScreens/automativeInsuranceScreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/colors.dart';
+import '../../models/automative.dart';
 import '../../widgets/customTextField.dart';
 
 class AutomativeInsuranceScreen2 extends StatefulWidget {
   static const automativeScreen2 = "/automativeScreen2";
-  const AutomativeInsuranceScreen2({super.key});
+
+  final Automative automative;
+  AutomativeInsuranceScreen2(this.automative);
 
   @override
   State<AutomativeInsuranceScreen2> createState() =>
@@ -36,7 +40,25 @@ class _AutomativeInsuranceScreen2State
           child: InkWell(
               onTap: () {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/automativeScreen3");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctx) => AutomativeInsuranceScreen3(
+                              Automative(
+                                  vahicleType: widget.automative.vahicleType,
+                                  vahicleBrand: widget.automative.vahicleBrand,
+                                  vahicleCategory:
+                                      widget.automative.vahicleCategory,
+                                  vahicleRegNo: widget.automative.vahicleRegNo,
+                                  vahicleColor: widget.automative.vahicleColor,
+                                  insuranceType:
+                                      widget.automative.insuranceType,
+                                  policyHolder: _policy.text,
+                                  nationalId: int.parse(_nat.text),
+                                  chassisNo: _vin.text,
+                                  noOfPassanger: int.parse(_pass.text),
+                                  noOfPrevAccident:
+                                      int.parse(_accident.text)))));
                 } else {
                   setState(() {
                     allValidate = false;

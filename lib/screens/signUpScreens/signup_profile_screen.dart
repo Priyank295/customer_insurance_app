@@ -1,14 +1,19 @@
+import 'dart:convert';
+
+import 'package:customer_insurance_app/models/user.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/signup_id_scanner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 import '../../common/colors.dart';
 import '../../widgets/mainBtn.dart';
 
 class SignUpProfileScreen extends StatefulWidget {
-  const SignUpProfileScreen({super.key});
+  String phone;
+  SignUpProfileScreen(this.phone);
 
   @override
   State<SignUpProfileScreen> createState() => _SignUpProfileScreenState();
@@ -187,8 +192,28 @@ class _SignUpProfileScreenState extends State<SignUpProfileScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (ctx) =>
-                                    const SignUpIDScannerScreen()));
+                                builder: (ctx) => SignUpIDScannerScreen(
+                                      user: User(
+                                        full_name: name.text,
+                                        email: email.text,
+                                        gender: gender.text,
+                                        dob: dob.text,
+                                        mobile_no: widget.phone,
+                                        occupation: occupation.text,
+                                        country: country.text,
+                                        city: city.text,
+                                        district: district.text,
+                                        national_id: nationalId.text,
+                                        road_name: road.text,
+                                        house_no: house.text,
+                                        housenoandbuildingname: house.text,
+                                        address:
+                                            road.text + house.text + city.text,
+                                        street: road.text,
+                                        state: district.text,
+                                        password: "",
+                                      ),
+                                    )));
                       },
                       child: Container(
                           margin: const EdgeInsets.only(top: 50, bottom: 19),
@@ -229,11 +254,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         initialDate: selectedDate,
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime(1950),
-        lastDate: DateTime(2023));
+        lastDate: DateTime.now());
     if (picked != null)
       setState(() {
         selectedDate = picked;
         widget.controller.text = DateFormat.yMd().format(selectedDate);
+        // widget.controller.text = selectedDate.toIso8601String();
       });
   }
 

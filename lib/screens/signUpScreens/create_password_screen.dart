@@ -1,14 +1,22 @@
+import 'dart:convert';
+
+import 'package:customer_insurance_app/database/apiIntegration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/colors.dart';
+import '../../models/user.dart';
 import '../../widgets/bottom_nav_button.dart';
 import 'finish_register_screen.dart';
+import 'package:http/http.dart' as http;
 
 class CreatePasswordScreen extends StatefulWidget {
   static const createPasswordScreen = '/createPasswordScreen';
-  const CreatePasswordScreen({super.key});
+
+  final User user;
+  CreatePasswordScreen({required this.user});
 
   @override
   State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
@@ -21,6 +29,34 @@ bool isFilled = false;
 final key = GlobalKey<FormState>();
 
 class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
+  Future<void> createUser(User user) async {
+    final apiUrl =
+        Uri.parse('https://soteria.thequantumtech.co.in/public/api/customer');
+
+    final response = await http.post(
+      apiUrl,
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(user),
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      Map<String, dynamic> mData = await jsonDecode(response.body);
+      // print(mData);
+      String data = mData['data']['token'];
+
+      saveToken(data);
+      // Data was successfully sent to the server.
+      // You can handle the response here if the server sends any data back.
+      print('User created successfully');
+    } else {
+      // Handle the error, e.g., by showing an error message to the user.
+      print('Failed to create user. Status code: ${response.body}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -31,10 +67,34 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       bottomNavigationBar: GestureDetector(
           onTap: () {
             if (key.currentState!.validate()) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (ctx) => const FinishRegisterScreen()));
+              print(widget.user.dob);
+              createUser(
+                User(
+                  address: widget.user.address,
+                  city: widget.user.city,
+                  country: widget.user.country,
+                  district: widget.user.district,
+                  dob: widget.user.dob.toString(),
+                  email: widget.user.email,
+                  full_name: widget.user.full_name,
+                  gender: widget.user.gender,
+                  house_no: widget.user.house_no,
+                  housenoandbuildingname: widget.user.housenoandbuildingname,
+                  mobile_no: widget.user.mobile_no,
+                  national_id:
+                      int.parse(widget.user.national_id.toString()).toString(),
+                  occupation: widget.user.occupation,
+                  password: _pass.text,
+                  road_name: widget.user.road_name,
+                  state: widget.user.state,
+                  street: widget.user.state,
+                ),
+              ).then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => FinishRegisterScreen()));
+              });
             }
           },
           child: BottomNavOneButton(context, "I Agree", "")),

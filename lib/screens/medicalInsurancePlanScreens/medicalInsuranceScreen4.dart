@@ -1,3 +1,4 @@
+import 'package:customer_insurance_app/database/apiIntegration.dart';
 import 'package:customer_insurance_app/screens/editProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,13 +6,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../common/colors.dart';
+import '../../models/medical.dart';
 import '../../widgets/customAppbar.dart';
 import '../../widgets/customTextField.dart';
 import '../../widgets/mainBtn.dart';
 
 class MedicalInsuranceScreen4 extends StatefulWidget {
   static const MedicalScreen4 = "/medicalScreen4";
-  const MedicalInsuranceScreen4({super.key});
+  final Medical medical;
+  MedicalInsuranceScreen4(this.medical);
 
   @override
   State<MedicalInsuranceScreen4> createState() =>
@@ -188,6 +191,18 @@ class _MedicalInsuranceScreen4State extends State<MedicalInsuranceScreen4> {
               child: InkWell(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
+                    MedicalInsuranceData(
+                      Medical(
+                          age: widget.medical.age,
+                          individualType: widget.medical.individualType,
+                          row: widget.medical.row,
+                          previouseMedicalCase:
+                              widget.medical.previouseMedicalCase,
+                          medicalDetails: widget.medical.medicalDetails,
+                          idNo: _id.text,
+                          nationalId: _nat.text,
+                          policyHolder: _policy.text),
+                    );
                     Navigator.pushNamed(context, "/medicalPlansScreen");
                   } else {
                     setState(() {

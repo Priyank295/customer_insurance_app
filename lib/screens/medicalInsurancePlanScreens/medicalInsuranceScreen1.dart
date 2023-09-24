@@ -1,8 +1,12 @@
+import 'package:customer_insurance_app/screens/medicalInsurancePlanScreens/medicalInsuranceFormScreen2.dart';
+import 'package:customer_insurance_app/screens/medicalInsurancePlanScreens/medicalInsuranceScreen2IfFamily.dart';
+import 'package:customer_insurance_app/screens/medicalInsurancePlanScreens/medicalInsuranceScreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/colors.dart';
+import '../../models/medical.dart';
 import '../../widgets/CustomAppbar.dart';
 import '../../widgets/customRadioButton.dart';
 import '../../widgets/customTextField.dart';
@@ -44,8 +48,21 @@ class MedicalInsuranceScreen1State extends State<MedicalInsuranceScreen1> {
           child: InkWell(
               onTap: () {
                 radioData == "All Family"
-                    ? Navigator.pushNamed(context, "/medicalScreen2")
-                    : Navigator.pushNamed(context, "/medicalScreen3");
+                    ? Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => MedicalInsuranceScreen2IfFamily(
+                              medical: Medical(
+                                  individualType: radioData, age: _age.text)),
+                        ),
+                      )
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => MedicalInsuranceScreen3(
+                                medical: Medical(
+                                    individualType: radioData,
+                                    age: _age.text))));
               },
               child: Container(
                 // margin: EdgeInsets.symmetric(horizontal: 26.5, vertical: 33),

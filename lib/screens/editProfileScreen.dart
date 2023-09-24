@@ -236,7 +236,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: DateTime(2022),
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime(1950),
         lastDate: DateTime(2023));

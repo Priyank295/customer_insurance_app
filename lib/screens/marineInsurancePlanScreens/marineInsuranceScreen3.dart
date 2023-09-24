@@ -1,14 +1,18 @@
+import 'package:customer_insurance_app/database/apiIntegration.dart';
+import 'package:customer_insurance_app/screens/marineInsurancePlanScreens/marineInsuranceFormScreen1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/colors.dart';
+import '../../models/marine.dart';
 import '../../widgets/bottom_nav_button.dart';
 import '../../widgets/customTextField.dart';
 
 class MarineInsuranceScreen3 extends StatefulWidget {
-  static const String marineScreen3 = "/marineScreen3";
-  const MarineInsuranceScreen3({super.key});
+  final Marine marine;
+
+  MarineInsuranceScreen3(this.marine);
 
   @override
   State<MarineInsuranceScreen3> createState() => _MarineInsuranceScreen3State();
@@ -76,7 +80,21 @@ class _MarineInsuranceScreen3State extends State<MarineInsuranceScreen3> {
               child: InkWell(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, "/marinePlansScreen");
+                    MarineInsuranceData(Marine(
+                        mobileNo: widget.marine.mobileNo,
+                        transportation: widget.marine.transportation,
+                        from: _from.text,
+                        insuranceAmount: _amount.text,
+                        nationalId: _nat.text,
+                        policyHolderName: _policy.text,
+                        subjectMatterInsurance: _sub.text,
+                        to: _to.text,
+                        via: _via.text));
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => MarineInsuranceFormScreen1()));
                   } else {
                     setState(() {
                       allValidate = false;

@@ -1,8 +1,11 @@
+import 'package:customer_insurance_app/screens/accidentInsurancePlanScreens/accidentInsuranceFormScreen2.dart';
+import 'package:customer_insurance_app/screens/accidentInsurancePlanScreens/accidentInsuranceScreen2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/colors.dart';
+import '../../models/accident.dart';
 import '../../widgets/bottom_nav_button.dart';
 import '../../widgets/customAppbar.dart';
 import '../../widgets/customTextField.dart';
@@ -35,7 +38,14 @@ class _AccidentScreen1State extends State<AccidentScreen1> {
           child: InkWell(
               onTap: () {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/accidentScreen2");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctx) => AccidentScreen2(Accident(
+                              firstName: _fname.text,
+                              middleName: _mname.text,
+                              lastName: _lname.text,
+                              age: _age.text))));
                 } else {
                   setState(() {
                     allValidate = false;
@@ -105,7 +115,7 @@ class _AccidentScreen1State extends State<AccidentScreen1> {
                       SizedBox(
                         height: 25,
                       ),
-                      customTextField(context, "Full Name", _fname, false),
+                      customTextField(context, "First Name", _fname, false),
                       customTextField(context, "Middle Name", _mname, false),
                       customTextField(context, "Last Name", _lname, false),
                       customTextField(context, "How old you are?", _age, true),

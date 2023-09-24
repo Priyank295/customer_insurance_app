@@ -123,6 +123,7 @@ class _TravelInsuranceScreen3State extends State<TravelInsuranceScreen3> {
                           children: [
                             SvgPicture.asset("assets/scanner.svg"),
                             FutureBuilder(
+                              future: null,
                               builder: (context, snapshot) {
                                 return _controller == null
                                     ? Center(child: CircularProgressIndicator())

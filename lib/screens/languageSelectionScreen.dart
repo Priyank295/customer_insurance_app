@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:customer_insurance_app/screens/signUpScreens/signup_register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../common/colors.dart';
 import '../widgets/mainBtn.dart';
 import 'registerScreen.dart';
+import 'package:http/http.dart' as http;
 
 class LanguageSelectionScreen extends StatefulWidget {
   static const String languageSelectionScreen = "/language";
@@ -32,6 +35,57 @@ const List<Map<String, String>> languages = [
 int selected = -1;
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
+  // Future<void> createUser() async {
+  //   final apiUrl = Uri.parse('http://localhost:8000/api/customer');
+
+  //   final response = await http.post(
+  //     apiUrl,
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: jsonEncode({
+  //       "full_name": "Priyank Dodiya",
+  //       "email": "priyank295@gmail.com",
+  //       "mobile_no": "9876543210",
+  //       "password": "Priyank@295",
+  //       "occupation": "null",
+  //       "gender": "male",
+  //       "address": "Marutinagar",
+  //       "dob": "29/5/2004",
+  //       "housenoandbuildingname": "plot 8",
+  //       "street": "railway station",
+  //       "country": "india",
+  //       "city": "bhavangar",
+  //       "state": "gujarat",
+  //       "district": "bhavnagar",
+  //       "national_id": "1234567890",
+  //       "road_name": "railway station",
+  //       "house_no": "8"
+  //     }),
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     print(response.body);
+  //     Map<String, dynamic> mData = await jsonDecode(response.body);
+  //     // print(mData);
+  //     String data = mData['data']['token'];
+  //     print(data.toString());
+  //     // Data was successfully sent to the server.
+  //     // You can handle the response here if the server sends any data back.
+  //     print('User created successfully');
+  //   } else {
+  //     // Handle the error, e.g., by showing an error message to the user.
+  //     print('Failed to create user. Status code: ${response.body}');
+  //   }
+  // }
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   createUser();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

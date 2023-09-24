@@ -305,7 +305,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                         height: 20,
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 16),
+                        margin: EdgeInsets.symmetric(horizontal: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

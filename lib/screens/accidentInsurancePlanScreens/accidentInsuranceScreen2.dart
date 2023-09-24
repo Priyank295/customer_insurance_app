@@ -1,16 +1,19 @@
+import 'package:customer_insurance_app/database/apiIntegration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../common/colors.dart';
+import '../../models/accident.dart';
 import '../../widgets/bottom_nav_button.dart';
 import '../../widgets/customAppbar.dart';
 import '../../widgets/customTextField.dart';
 
 class AccidentScreen2 extends StatefulWidget {
   static const String accidentScreen2 = "/accidentScreen2";
-  const AccidentScreen2({super.key});
+  final Accident accident;
+  AccidentScreen2(this.accident);
 
   @override
   State<AccidentScreen2> createState() => _AccidentScreen2State();
@@ -30,13 +33,13 @@ class _AccidentScreen2State extends State<AccidentScreen2> {
       BuildContext context, TextEditingController _controller) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime(2022),
       firstDate: DateTime(1900),
-      lastDate: DateTime(3000),
+      lastDate: DateTime(2023),
     );
     if (picked != null) {
       setState(() {
-        _controller.text = DateFormat('dd/MM/yy').format(picked);
+        _controller.text = DateFormat('dd/MM/yyyy').format(picked);
       });
     }
   }
@@ -92,6 +95,16 @@ class _AccidentScreen2State extends State<AccidentScreen2> {
               child: InkWell(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
+                    AccidentInsuranceData(Accident(
+                        firstName: widget.accident.firstName,
+                        middleName: widget.accident.middleName,
+                        lastName: widget.accident.lastName,
+                        age: widget.accident.age,
+                        policyHolderName: _policy.text,
+                        nationalId: _nat.text,
+                        dob: "",
+                        insuranceAmount: _amount.text,
+                        occupancy: _occupancy.text));
                     Navigator.pushNamed(context, "/accidentPlansScreen");
                   } else {
                     setState(() {

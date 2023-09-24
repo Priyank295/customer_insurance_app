@@ -1,8 +1,11 @@
+import 'package:customer_insurance_app/screens/LifeInsurancePlanScreens/lifeInsuranceScreen1.dart';
+import 'package:customer_insurance_app/screens/automativeInsurancePlanScreens/automativeInsuranceScreen2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../common/colors.dart';
+import '../../models/automative.dart';
 import '../../widgets/customTextField.dart';
 
 class AutomativeInsuranceScreen1 extends StatefulWidget {
@@ -189,7 +192,20 @@ class _AutomativeInsuranceScreen1State
           child: InkWell(
               onTap: () {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/automativeScreen2");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) => AutomativeInsuranceScreen2(
+                        Automative(
+                            vahicleType: selectedOption1,
+                            vahicleBrand: _brand.text,
+                            vahicleCategory: _category.text,
+                            vahicleColor: _color.text,
+                            insuranceType: selectedOption2,
+                            vahicleRegNo: _reg.text),
+                      ),
+                    ),
+                  );
                 } else {
                   setState(() {
                     allValidate = false;

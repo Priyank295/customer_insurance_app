@@ -45,7 +45,7 @@ const List<Map<String, String>> insurancesData = [
   {
     "name": "Marine \nInsurance",
     "icon": "assets/marineInsurance.svg",
-    "navigate": "/marineScreen3",
+    "navigate": "/marineScreen1",
   },
   {
     "name": "Automotive \nInsurance",

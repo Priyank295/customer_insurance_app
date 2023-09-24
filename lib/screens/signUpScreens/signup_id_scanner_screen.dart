@@ -1,11 +1,52 @@
 import 'package:camera/camera.dart';
+import 'package:customer_insurance_app/common/colors.dart';
+import 'package:customer_insurance_app/models/user.dart';
+import 'package:customer_insurance_app/screens/signUpScreens/conditions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/bottom_nav_button.dart';
 
 class SignUpIDScannerScreen extends StatefulWidget {
-  const SignUpIDScannerScreen({super.key});
+  final User user;
+  // final String full_name;
+  // final String email;
+  // final String mobile_no;
+  // final String occupation;
+  // final String gender;
+  // final String address;
+  // final String dob;
+  // final String housenoandbuildingname;
+  // final String street;
+  // final String country;
+  // final String city;
+  // final String state;
+  // final String district;
+  // final String national_id;
+  // final String road_name;
+  // final String house_no;
+  // final String phone;
+
+  SignUpIDScannerScreen({required this.user});
+
+  // required this.full_name,
+  // required this.email,
+  // required this.address,
+  // required this.city,
+  // required this.country,
+  // required this.dob,
+  // required this.district,
+  // required this.gender,
+  // required this.house_no,
+  // required this.housenoandbuildingname,
+  // required this.mobile_no,
+  // required this.national_id,
+  // required this.occupation,
+  // required this.road_name,
+  // required this.state,
+  // required this.street,
+  // required this.phone
 
   @override
   State<SignUpIDScannerScreen> createState() => _SignUpIDScannerScreen();
@@ -52,8 +93,39 @@ class _SignUpIDScannerScreen extends State<SignUpIDScannerScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar:
-          BottomNavOneButton(context, "Save & Next", "/conditionsScreen"),
+      bottomNavigationBar: Container(
+          color: Colors.white,
+          margin: EdgeInsets.only(bottom: 33, top: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 26.5),
+          child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => ConditionsScreen(widget.user)));
+              },
+              child: Container(
+                // margin: EdgeInsets.symmetric(horizontal: 26.5, vertical: 33),
+                width: MediaQuery.of(context).size.width,
+                height: 55,
+                decoration: ShapeDecoration(
+                  gradient: AppColors.primaryGradient,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    "Save & Next",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.nunito(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ))),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -136,6 +208,7 @@ class _SignUpIDScannerScreen extends State<SignUpIDScannerScreen> {
                               width: double.infinity,
                             ),
                             FutureBuilder(
+                              future: null,
                               builder: (context, snapshot) {
                                 return _controller == null
                                     ? Center(child: CircularProgressIndicator())

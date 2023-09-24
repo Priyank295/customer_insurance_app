@@ -1,10 +1,13 @@
 import 'package:custom_check_box/custom_check_box.dart';
+import 'package:customer_insurance_app/screens/medicalInsurancePlanScreens/medicalInsuranceScreen3.dart';
+import 'package:customer_insurance_app/screens/medicalInsurancePlanScreens/medicalInsuranceScreen4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../common/colors.dart';
+import '../../models/medical.dart';
 import '../../widgets/customAppbar.dart';
 import '../../widgets/bottom_nav_button.dart';
 import '../../widgets/customTextField.dart';
@@ -13,7 +16,8 @@ import 'medicalInsuranceScreen1.dart';
 
 class MedicalInsuranceScreen2IfFamily extends StatefulWidget {
   static const MedicalScreen2 = "/medicalScreen2";
-  const MedicalInsuranceScreen2IfFamily({super.key});
+  final Medical medical;
+  MedicalInsuranceScreen2IfFamily({required this.medical});
 
   @override
   State<MedicalInsuranceScreen2IfFamily> createState() =>
@@ -47,6 +51,8 @@ List<TextEditingController> dobList = [
 List<TextEditingController> conList = [
   TextEditingController(),
 ];
+
+List<Family> rowData = [];
 
 TextEditingController _conditions = TextEditingController();
 
@@ -93,7 +99,22 @@ class _MedicalInsuranceScreen2IfFamilyState
           child: InkWell(
               onTap: () {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/medicalScreen3");
+                  for (int i = 0; i < nameList.length; i++) {
+                    rowData.add(
+                        Family(name: nameList[i].text, dob: dobList[i].text));
+                  }
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) => MedicalInsuranceScreen3(
+                        medical: Medical(
+                            age: widget.medical.age,
+                            individualType: widget.medical.individualType,
+                            row: rowData),
+                      ),
+                    ),
+                  );
                 } else {
                   setState(() {
                     allValidate = false;

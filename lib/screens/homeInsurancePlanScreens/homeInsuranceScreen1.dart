@@ -1,8 +1,11 @@
+import 'package:customer_insurance_app/database/apiIntegration.dart';
+import 'package:customer_insurance_app/screens/homeInsurancePlanScreens/homeInsuranceScreen2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/colors.dart';
+import '../../models/home.dart';
 import '../../widgets/customAppbar.dart';
 import '../../widgets/customTextField.dart';
 
@@ -97,7 +100,27 @@ class _HomeInsuranceScreen1State extends State<HomeInsuranceScreen1> {
           child: InkWell(
               onTap: () {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/homeScreen2");
+                  // HomeInsuranceStoreData(Home(
+                  //     fname: _fname.text,
+                  //     nationality: _nat.text,
+                  //     nationalId: int.parse(_natId.text),
+                  //     coverage: _limit.text,
+                  //     category: "home",
+                  //     sizeofvilla: int.parse(_size.text),
+                  //     location: _location.text));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctx) => HomeInsuranceScreen2(
+                                home: Home(
+                                    fname: _fname.text,
+                                    nationality: _nat.text,
+                                    nationalId: int.parse(_natId.text),
+                                    coverage: _limit.text,
+                                    category: "home",
+                                    sizeofvilla: int.parse(_size.text),
+                                    location: _location.text),
+                              )));
                 } else {
                   setState(() {
                     allValidate = false;
