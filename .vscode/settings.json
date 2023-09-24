@@ -1,0 +1,5 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cmake.configureOnOpen": false,
+    "cmake.sourceDirectory": "D:/Priyank/customer_insurance_app/linux/flutter"
+}
