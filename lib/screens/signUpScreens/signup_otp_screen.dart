@@ -22,22 +22,30 @@ bool invalid = false;
 class _SignUpOtpScreenState extends State<SignUpOtpScreen> {
   @override
   Widget build(BuildContext context) {
+    String phone2 = "";
+    for (int i = 0; i < 7; i++) {
+      phone2 += widget.phone[i];
+    }
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       bottomNavigationBar: Container(
-          color: Colors.transparent,
-          margin: EdgeInsets.only(bottom: 33),
-          padding: const EdgeInsets.symmetric(horizontal: 26.5),
-          child: InkWell(
-              onTap: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (ctx) => SignUpProfileScreen(widget.phone)),
-                    (route) => false);
-              },
-              child: MainButton(context, "Next"))),
+        color: Colors.transparent,
+        margin: EdgeInsets.only(bottom: 33),
+        padding: const EdgeInsets.symmetric(horizontal: 26.5),
+        child: InkWell(
+          onTap: () {
+            if (!invalid) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (ctx) => SignUpProfileScreen(widget.phone)),
+                  (route) => false);
+            }
+          },
+          child: MainButton(context, "Next"),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: SafeArea(
@@ -88,8 +96,8 @@ class _SignUpOtpScreenState extends State<SignUpOtpScreen> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(right: 8),
-                      child: const Text(
-                        '+91-9907678***',
+                      child: Text(
+                        "+91-${phone2}***",
                         style: TextStyle(
                           color: Color(0xFF0A2472),
                           fontSize: 18,
@@ -171,7 +179,7 @@ class _SignUpOtpScreenState extends State<SignUpOtpScreen> {
                         onSubmit: (String verificationCode) {
                           setState(() {
                             filled = true;
-                            verificationCode == "1111"
+                            verificationCode != "1234"
                                 ? invalid = true
                                 : invalid = false;
                           });

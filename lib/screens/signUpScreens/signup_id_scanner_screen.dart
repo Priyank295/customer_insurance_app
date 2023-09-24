@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:customer_insurance_app/common/colors.dart';
 import 'package:customer_insurance_app/models/user.dart';
+import 'package:customer_insurance_app/screens/medicalInsurancePlanScreens/medicalInsuranceScreen2IfFamily.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/conditions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -55,6 +56,11 @@ class SignUpIDScannerScreen extends StatefulWidget {
 class _SignUpIDScannerScreen extends State<SignUpIDScannerScreen> {
   List<CameraDescription> cameras = [];
   CameraController? _controller;
+  // late CameraController _controller;
+  // late Future<void> _initializeControllerFuture;
+
+  bool isPause = false;
+  // XFile userImg = XFile();
   Future<void> initCamera() async {
     cameras = await availableCameras();
   }
@@ -81,6 +87,7 @@ class _SignUpIDScannerScreen extends State<SignUpIDScannerScreen> {
   @override
   void initState() {
     super.initState();
+
     initCamera().then((_) {
       startCamera();
     });
@@ -235,6 +242,76 @@ class _SignUpIDScannerScreen extends State<SignUpIDScannerScreen> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              try {
+                                setState(() {
+                                  _controller!.pausePreview();
+                                  isPause = true;
+                                });
+                                // final image = await _controller!.takePicture();
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: AppColors.fontSecondaryColor,
+                                    width: 0.5,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.camera,
+                                    color: AppColors.fontSecondaryColor,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Take Photo",
+                                    style: TextStyle(
+                                      color: AppColors.fontSecondaryColor,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          isPause
+                              ? SizedBox(
+                                  width: 20,
+                                )
+                              : Container(),
+                          isPause
+                              ? GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _controller!.resumePreview();
+                                      isPause = false;
+                                    });
+                                  },
+                                  child: Text(
+                                    "Retake",
+                                    style: TextStyle(
+                                        color: Colors.redAccent,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                )
+                              : Container(),
+                        ],
+                      )
                     ],
                   ),
                 ),

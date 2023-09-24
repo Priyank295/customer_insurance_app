@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:customer_insurance_app/models/user.dart';
+import 'package:customer_insurance_app/screens/accidentInsurancePlanScreens/accidentInsuranceScreen1.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/signup_id_scanner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,7 +34,58 @@ TextEditingController house = TextEditingController();
 TextEditingController placeToWork = TextEditingController();
 TextEditingController nationalId = TextEditingController();
 
+final formKey = GlobalKey<FormState>();
+bool allValidate = true;
+
 class _SignUpProfileScreenState extends State<SignUpProfileScreen> {
+  String selectedOption = '';
+
+  void showRadioDailog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // title: Text('Select an option'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RadioListTile(
+                title: Text('Male'),
+                value: 'Male',
+                groupValue: selectedOption,
+                onChanged: (value) {
+                  setState(() {
+                    selectedOption = value.toString();
+                    gender.text = selectedOption;
+                    // categoryEmpty = false;
+                    // isFilled = true;
+                    print(selectedOption);
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+              RadioListTile(
+                title: Text('Female'),
+                value: 'Female',
+                groupValue: selectedOption,
+                onChanged: (value) {
+                  setState(() {
+                    selectedOption = value.toString();
+                    gender.text = selectedOption;
+
+                    // isFilled = true;
+                    print(selectedOption);
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -106,121 +158,199 @@ class _SignUpProfileScreenState extends State<SignUpProfileScreen> {
               SizedBox(
                 height: 34,
               ),
-              Column(
-                children: [
-                  CustomTextField(
-                      name: "Name",
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    CustomTextField(
+                        name: "Name",
+                        icon: "",
+                        needCalender: false,
+                        controller: name),
+                    CustomTextField(
+                      name: "Email ID",
                       icon: "",
+                      controller: email,
                       needCalender: false,
-                      controller: name),
-                  CustomTextField(
-                    name: "Email ID",
-                    icon: "",
-                    controller: email,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "Gender",
-                    icon: "assets/downBlack.svg",
-                    controller: gender,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "Birthdate (DD/MM/YYYY)",
-                    icon: "assets/calender.svg",
-                    controller: dob,
-                    needCalender: true,
-                  ),
-                  CustomTextField(
-                    name: "Mobile No.",
-                    icon: "assets/lock.svg",
-                    controller: mobile,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "Occupation",
-                    icon: "assets/downBlack.svg",
-                    controller: occupation,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "Country",
-                    icon: "assets/downBlack.svg",
-                    controller: country,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "City",
-                    icon: "assets/downBlack.svg",
-                    controller: city,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "District",
-                    icon: "assets/downBlack.svg",
-                    controller: district,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "National ID",
-                    icon: "",
-                    controller: nationalId,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "Road Name",
-                    icon: "assets/downBlack.svg",
-                    controller: road,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "House No./Building Name",
-                    icon: "assets/downBlack.svg",
-                    controller: house,
-                    needCalender: false,
-                  ),
-                  CustomTextField(
-                    name: "Place of Work",
-                    icon: "",
-                    controller: placeToWork,
-                    needCalender: false,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) => SignUpIDScannerScreen(
-                                      user: User(
-                                        full_name: name.text,
-                                        email: email.text,
-                                        gender: gender.text,
-                                        dob: dob.text,
-                                        mobile_no: widget.phone,
-                                        occupation: occupation.text,
-                                        country: country.text,
-                                        city: city.text,
-                                        district: district.text,
-                                        national_id: nationalId.text,
-                                        road_name: road.text,
-                                        house_no: house.text,
-                                        housenoandbuildingname: house.text,
-                                        address:
-                                            road.text + house.text + city.text,
-                                        street: road.text,
-                                        state: district.text,
-                                        password: "",
-                                      ),
-                                    )));
-                      },
-                      child: Container(
-                          margin: const EdgeInsets.only(top: 50, bottom: 19),
-                          child: MainButton(context, "Save & Next")),
                     ),
-                  )
-                ],
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 12.5),
+                      width: width,
+                      constraints: BoxConstraints(minHeight: 65),
+                      padding: EdgeInsets.symmetric(horizontal: 26),
+                      child: TextFormField(
+                        onTap: () {
+                          showRadioDailog(context);
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "\u24D8 Please Select Gender here";
+                          }
+                        },
+                        controller: gender,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          // fontFamily: 'Nunito',
+                          fontWeight: FontWeight.w700,
+                        ),
+                        decoration: InputDecoration(
+                          isDense: true,
+                          suffixIconConstraints:
+                              BoxConstraints(maxHeight: 65, maxWidth: 40),
+                          suffixIcon: Container(
+                            width: 100,
+                            height: 65,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                "assets/downBlack.svg",
+                              ),
+                            ),
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          label: Container(
+                            child: Text(
+                              "Gender",
+                              style: GoogleFonts.nunito(
+                                color: Color(0xFF939EAA),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          errorStyle: TextStyle(
+                            color: Color(0xFFFF5353),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFFF5353),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10)),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFFF5353),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(10)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.circular(10)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff008EFF),
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                      ),
+                    ),
+                    CustomTextField(
+                      name: "Birthdate (DD/MM/YYYY)",
+                      icon: "assets/calender.svg",
+                      controller: dob,
+                      needCalender: true,
+                    ),
+                    CustomTextField(
+                      name: "Mobile No.",
+                      icon: "assets/lock.svg",
+                      controller: mobile,
+                      needCalender: false,
+                    ),
+                    CustomTextField(
+                      name: "Occupation",
+                      icon: "assets/downBlack.svg",
+                      controller: occupation,
+                      needCalender: false,
+                    ),
+                    CustomTextField(
+                      name: "Country",
+                      icon: "assets/downBlack.svg",
+                      controller: country,
+                      needCalender: false,
+                    ),
+                    CustomTextField(
+                      name: "City",
+                      icon: "assets/downBlack.svg",
+                      controller: city,
+                      needCalender: false,
+                    ),
+                    CustomTextField(
+                      name: "District",
+                      icon: "assets/downBlack.svg",
+                      controller: district,
+                      needCalender: false,
+                    ),
+                    CustomTextField(
+                      name: "National ID",
+                      icon: "",
+                      controller: nationalId,
+                      needCalender: false,
+                    ),
+                    CustomTextField(
+                      name: "Road Name",
+                      icon: "assets/downBlack.svg",
+                      controller: road,
+                      needCalender: false,
+                    ),
+                    CustomTextField(
+                      name: "House No./Building Name",
+                      icon: "assets/downBlack.svg",
+                      controller: house,
+                      needCalender: false,
+                    ),
+                    CustomTextField(
+                      name: "Place of Work",
+                      icon: "",
+                      controller: placeToWork,
+                      needCalender: false,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 26),
+                      child: GestureDetector(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) => SignUpIDScannerScreen(
+                                          user: User(
+                                            full_name: name.text,
+                                            email: email.text,
+                                            gender: gender.text,
+                                            dob: dob.text,
+                                            mobile_no: widget.phone,
+                                            occupation: occupation.text,
+                                            country: country.text,
+                                            city: city.text,
+                                            district: district.text,
+                                            national_id: nationalId.text,
+                                            road_name: road.text,
+                                            house_no: house.text,
+                                            housenoandbuildingname: house.text,
+                                            address: road.text +
+                                                house.text +
+                                                city.text,
+                                            street: road.text,
+                                            state: district.text,
+                                            password: "",
+                                          ),
+                                        )));
+                          }
+                        },
+                        child: Container(
+                            margin: const EdgeInsets.only(top: 50, bottom: 19),
+                            child: MainButton(context, "Save & Next")),
+                      ),
+                    )
+                  ],
+                ),
               )
             ],
           ),
@@ -268,59 +398,88 @@ class _CustomTextFieldState extends State<CustomTextField> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 12.5),
-      width: width,
-      height: 65,
       padding: EdgeInsets.symmetric(horizontal: 26),
-      child: TextFormField(
-        onTap: () {
-          widget.needCalender ? _selectDate(context) : null;
-        },
-        controller: widget.controller,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 18,
-          // fontFamily: 'Nunito',
-          fontWeight: FontWeight.w700,
-        ),
-        decoration: InputDecoration(
-          isDense: true,
-          suffixIconConstraints: BoxConstraints(maxHeight: 65, maxWidth: 40),
-          suffixIcon: widget.icon.length != 0
-              ? Container(
-                  width: 100,
-                  height: 65,
-                  child: Center(
-                    child: SvgPicture.asset(
-                      widget.icon,
+      margin: EdgeInsets.symmetric(vertical: 7.5),
+      child: Column(
+        children: [
+          Container(
+            // margin: EdgeInsets.symmetric(vertical: 12.5),
+            width: width,
+            constraints: BoxConstraints(minHeight: 65),
+            // padding: EdgeInsets.symmetric(horizontal: 26),
+            child: TextFormField(
+              controller: widget.controller,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "\u24D8 Please enter ${widget.name.toLowerCase()} here";
+                }
+              },
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                // fontFamily: 'Nunito',
+                fontWeight: FontWeight.w700,
+              ),
+              decoration: InputDecoration(
+                isDense: true,
+                suffixIconConstraints:
+                    BoxConstraints(maxHeight: 65, maxWidth: 40),
+                suffixIcon: widget.icon.length != 0
+                    ? Container(
+                        width: 100,
+                        height: 65,
+                        child: Center(
+                          child: SvgPicture.asset(
+                            widget.icon,
+                          ),
+                        ),
+                      )
+                    : null,
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                label: Container(
+                  child: Text(
+                    widget.name,
+                    style: GoogleFonts.nunito(
+                      color: Color(0xFF939EAA),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                )
-              : null,
-          contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          label: Container(
-            child: Text(
-              widget.name,
-              style: GoogleFonts.nunito(
-                color: Color(0xFF939EAA),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+                ),
+                errorStyle: TextStyle(
+                  color: Color(0xFFFF5353),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xFFFF5353),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10)),
+                errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xFFFF5353),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 0.5,
+                    ),
+                    borderRadius: BorderRadius.circular(10)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xff008EFF),
+                      width: 0.5,
+                    ),
+                    borderRadius: BorderRadius.circular(10)),
               ),
             ),
           ),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black,
-                width: 0.5,
-              ),
-              borderRadius: BorderRadius.circular(10)),
-          focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color(0xff008EFF),
-                width: 0.5,
-              ),
-              borderRadius: BorderRadius.circular(10)),
-        ),
+        ],
       ),
     );
   }

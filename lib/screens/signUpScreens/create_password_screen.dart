@@ -46,8 +46,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       Map<String, dynamic> mData = await jsonDecode(response.body);
       // print(mData);
       String data = mData['data']['token'];
-
-      saveToken(data);
+      String id = mData['data']['id'].toString();
+      print("id : " + id);
+      saveToken(data, id);
       // Data was successfully sent to the server.
       // You can handle the response here if the server sends any data back.
       print('User created successfully');

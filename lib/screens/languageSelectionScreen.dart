@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:customer_insurance_app/screens/signUpScreens/signup_register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../common/colors.dart';
@@ -31,6 +32,9 @@ const List<Map<String, String>> languages = [
     "value": "1",
   },
 ];
+
+TextEditingController find = new TextEditingController();
+List<Map<String, String>> filteredItems = [];
 
 int selected = -1;
 
@@ -85,6 +89,27 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   //   createUser();
   //   super.initState();
   // }
+
+  void filterSearchResults(String query) {
+    List<Map<String, String>> searchResults = [];
+    if (query.isNotEmpty) {
+      languages.forEach((item) {
+        if (item['name']
+            .toString()
+            .toLowerCase()
+            .contains(query.toLowerCase())) {
+          searchResults.add(item);
+        }
+      });
+    } else {
+      searchResults.addAll(languages);
+    }
+
+    setState(() {
+      filteredItems.clear();
+      filteredItems.addAll(searchResults);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +173,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                         // ),
                         Expanded(
                           child: TextFormField(
+                            controller: find,
+                            onChanged: filterSearchResults,
                             cursorColor: AppColors.fontPrimaryColor,
                             decoration: InputDecoration(
                               hintText: "Find a language",
@@ -167,88 +194,142 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               const SizedBox(
                 height: 38,
               ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selected = 0;
-                  });
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 15),
-                  width: double.infinity,
-                  height: 79,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Color(0xFFFFE7A5)),
-                      borderRadius: BorderRadius.circular(10),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: filteredItems.isEmpty
+                    ? languages.length
+                    : filteredItems.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selected = index;
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 15),
+                      width: double.infinity,
+                      height: 79,
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(width: 1, color: Color(0xFFFFE7A5)),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        color: selected == index
+                            ? Color(0xFFFFE7A5)
+                            : Colors.transparent,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 29),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                filteredItems.isEmpty
+                                    ? languages[index]['name'].toString()
+                                    : filteredItems[index]['name'].toString(),
+                                style: GoogleFonts.nunito(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: selected == index
+                                      ? FontWeight.bold
+                                      : FontWeight.w500,
+                                ),
+                              ),
+                              SvgPicture.asset(
+                                filteredItems.isEmpty
+                                    ? languages[index]['icon'].toString()
+                                    : filteredItems[index]['icon'].toString(),
+                                color: selected == index ? Colors.black : null,
+                              ),
+                            ]),
+                      ),
                     ),
-                    color:
-                        selected == 0 ? Color(0xFFFFE7A5) : Colors.transparent,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 29),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Arabic",
-                            style: GoogleFonts.nunito(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: selected == 0
-                                  ? FontWeight.bold
-                                  : FontWeight.w500,
-                            ),
-                          ),
-                          SvgPicture.asset(
-                            "assets/arabic.svg",
-                            color: selected == 0 ? Colors.black : null,
-                          ),
-                        ]),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selected = 1;
-                  });
+                  );
                 },
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 15),
-                  width: double.infinity,
-                  height: 79,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Color(0xFFFFE7A5)),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    color:
-                        selected == 1 ? Color(0xFFFFE7A5) : Colors.transparent,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 29),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "English",
-                            style: GoogleFonts.nunito(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: selected == 1
-                                  ? FontWeight.bold
-                                  : FontWeight.w500,
-                            ),
-                          ),
-                          SvgPicture.asset(
-                            "assets/english.svg",
-                            color: selected == 1 ? Colors.black : null,
-                          ),
-                        ]),
-                  ),
-                ),
               ),
+              // GestureDetector(
+              //   onTap: () {
+              //     setState(() {
+              //       selected = 0;
+              //     });
+              //   },
+              //   child: Container(
+              //     margin: const EdgeInsets.only(bottom: 15),
+              //     width: double.infinity,
+              //     height: 79,
+              //     decoration: ShapeDecoration(
+              //       shape: RoundedRectangleBorder(
+              //         side: BorderSide(width: 1, color: Color(0xFFFFE7A5)),
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //       color:
+              //           selected == 0 ? Color(0xFFFFE7A5) : Colors.transparent,
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.symmetric(horizontal: 29),
+              //       child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               "Arabic",
+              //               style: GoogleFonts.nunito(
+              //                 color: Colors.black,
+              //                 fontSize: 18,
+              //                 fontWeight: selected == 0
+              //                     ? FontWeight.bold
+              //                     : FontWeight.w500,
+              //               ),
+              //             ),
+              //             SvgPicture.asset(
+              //               "assets/arabic.svg",
+              //               color: selected == 0 ? Colors.black : null,
+              //             ),
+              //           ]),
+              //     ),
+              //   ),
+              // ),
+              // GestureDetector(
+              //   onTap: () {
+              //     setState(() {
+              //       selected = 1;
+              //     });
+              //   },
+              //   child: Container(
+              //     margin: const EdgeInsets.only(bottom: 15),
+              //     width: double.infinity,
+              //     height: 79,
+              //     decoration: ShapeDecoration(
+              //       shape: RoundedRectangleBorder(
+              //         side: BorderSide(width: 1, color: Color(0xFFFFE7A5)),
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //       color:
+              //           selected == 1 ? Color(0xFFFFE7A5) : Colors.transparent,
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.symmetric(horizontal: 29),
+              //       child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               "English",
+              //               style: GoogleFonts.nunito(
+              //                 color: Colors.black,
+              //                 fontSize: 18,
+              //                 fontWeight: selected == 1
+              //                     ? FontWeight.bold
+              //                     : FontWeight.w500,
+              //               ),
+              //             ),
+              //             SvgPicture.asset(
+              //               "assets/english.svg",
+              //               color: selected == 1 ? Colors.black : null,
+              //             ),
+              //           ]),
+              //     ),
+              //   ),
+              // ),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -260,10 +341,15 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       // padding: const EdgeInsets.symmetric(horizontal: 26.5),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (ctx) => RegisterScreen()));
+                          if (selected == -1) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("Please select language")));
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) => RegisterScreen()));
+                          }
                         },
                         child: MainButton(context, "Next"),
                       ),

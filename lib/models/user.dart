@@ -57,4 +57,25 @@ class User {
       "house_no": house_no,
     };
   }
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+        full_name: json['full_name'],
+        email: json['email'],
+        occupation: json['occupation'],
+        mobile_no: json['mobile_no'],
+        gender: json['gender'],
+        address: json['address'],
+        dob: json['dob'],
+        housenoandbuildingname: json['housenoandbuildingname'],
+        street: json['street'],
+        country: json['country'],
+        city: json['city'],
+        state: json['state'],
+        district: json['district'],
+        house_no: json['house_no'],
+        national_id: json['national_id'],
+        password: json['password'],
+        road_name: json['road_name']);
+  }
 }

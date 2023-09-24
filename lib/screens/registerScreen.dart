@@ -24,6 +24,7 @@ bool invalid = false;
 bool check = false;
 List<Country> countryList = [];
 Map<String, dynamic> countryMap = {};
+TextEditingController _phone = new TextEditingController();
 
 class _RegisterScreenState extends State<RegisterScreen> {
   // Future loadJsonData() async {
@@ -80,49 +81,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           });
                         },
                         child: Container(
-                          height: 65,
+                          height: 70,
                           width: double.infinity,
-                          child: Expanded(
-                            child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        child: Flag.fromString(
-                                          data[index].code.toString(),
-                                          height: 30,
-                                          width: 30,
-                                        ),
+                          child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      child: Flag.fromString(
+                                        data[index].code.toString(),
+                                        height: 30,
+                                        width: 30,
                                       ),
-                                      Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Expanded(
-                                            child: Container(
-                                              width: 180,
-                                              height: 65,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(data[index]
-                                                      .name
-                                                      .toString()),
-                                                ],
-                                              ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Expanded(
+                                          child: Container(
+                                            width: 180,
+                                            height: 70,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(data[index]
+                                                    .name
+                                                    .toString()),
+                                              ],
                                             ),
-                                          )),
-                                    ],
-                                  ),
-                                  Text(data[index].dialCode.toString()),
-                                ]),
-                          ),
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                                Text(data[index].dialCode.toString()),
+                              ]),
                         ),
                       );
                     },
@@ -156,13 +154,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 26.5),
           child: InkWell(
               onTap: () {
-                conditions
-                    ? Navigator.push(context,
-                        MaterialPageRoute(builder: (ctx) => OtpVerifyScreen()))
-                    : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Please check Terms & conditions"),
-                        duration: Duration(seconds: 2),
-                      ));
+                if (conditions == false) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Please check Terms & conditions"),
+                    duration: Duration(seconds: 2),
+                  ));
+                }
+
+                if (invalid || _phone.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Please enter mobile number"),
+                    duration: Duration(seconds: 2),
+                  ));
+                }
+
+                if (conditions && _phone.text.isNotEmpty && !invalid) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctx) => OtpVerifyScreen(_phone.text)));
+                }
               },
               child: MainButton(context, "Continue"))),
       body: SafeArea(
@@ -261,6 +272,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: _phone,
                             maxLength: 10,
                             onChanged: (value) {
                               // if (value.length < 10) {

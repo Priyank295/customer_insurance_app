@@ -1,3 +1,4 @@
+import 'package:customer_insurance_app/common/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -46,7 +47,9 @@ Widget tour1(context) {
                                   onTap: () {
                                     Navigator.pop(context);
                                   },
-                                  child: SvgPicture.asset("assets/close.svg"))
+                                  child: SvgPicture.asset(
+                                    "assets/close.svg",
+                                  ))
                             ],
                           ),
                           const SizedBox(
@@ -69,7 +72,7 @@ Widget tour1(context) {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SvgPicture.asset("assets/tourLoader.svg"),
+                          SvgPicture.asset("assets/tourLoader1.svg"),
                           InkWell(
                             onTap: () {
                               Navigator.pop(context);
@@ -102,7 +105,7 @@ Widget tour1(context) {
                                   'Next',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Color(0xFFEF7C00),
+                                    color: AppColors.fontSecondaryColor,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -191,7 +194,7 @@ Widget tour2(context) {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SvgPicture.asset("assets/tourLoader.svg"),
+                        SvgPicture.asset("assets/tourLoader2.svg"),
                         InkWell(
                           onTap: () {
                             Navigator.pop(context);
@@ -223,7 +226,7 @@ Widget tour2(context) {
                                 'Next',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Color(0xFFEF7C00),
+                                  color: AppColors.fontSecondaryColor,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -311,7 +314,7 @@ Widget tour3(context) {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SvgPicture.asset("assets/tourLoader.svg"),
+                        SvgPicture.asset("assets/tourLoader4.svg"),
                         InkWell(
                           onTap: () {
                             Navigator.pop(context);
@@ -343,7 +346,7 @@ Widget tour3(context) {
                                 'Got it',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Color(0xFFEF7C00),
+                                  color: AppColors.fontSecondaryColor,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
                                 ),

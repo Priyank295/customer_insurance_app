@@ -12,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../common/colors.dart';
 import '../../models/country.dart';
 import '../../widgets/mainBtn.dart';
+import '../otpVerifyScreen.dart';
 
 class SignUpRegisterScreen extends StatefulWidget {
   const SignUpRegisterScreen({super.key});
@@ -72,7 +73,7 @@ class _SignUpRegisterScreenState extends State<SignUpRegisterScreen> {
                           });
                         },
                         child: Container(
-                          height: 65,
+                          height: 70,
                           width: double.infinity,
                           child: Expanded(
                             child: Row(
@@ -96,7 +97,7 @@ class _SignUpRegisterScreenState extends State<SignUpRegisterScreen> {
                                           child: Expanded(
                                             child: Container(
                                               width: 180,
-                                              height: 65,
+                                              height: 70,
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
@@ -364,18 +365,29 @@ class _SignUpRegisterScreenState extends State<SignUpRegisterScreen> {
                       // padding: const EdgeInsets.symmetric(horizontal: 26.5),
                       child: InkWell(
                         onTap: () {
-                          conditions
-                              ? Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (ctx) =>
-                                          SignUpOtpScreen(_phone.text)))
-                              : ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                  content:
-                                      Text("Please check Terms & conditions"),
-                                  duration: Duration(seconds: 2),
-                                ));
+                          if (conditions == false) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Please check Terms & conditions"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          }
+
+                          if (invalid || _phone.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Please enter mobile number"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          }
+
+                          if (conditions &&
+                              _phone.text.isNotEmpty &&
+                              !invalid) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) =>
+                                        SignUpOtpScreen(_phone.text)));
+                          }
                         },
                         child: MainButton(context, "Sign Up"),
                       ),

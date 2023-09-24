@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../common/colors.dart';
@@ -9,7 +10,9 @@ import '../widgets/mainBtn.dart';
 import 'bottomNavigationBarScreens.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
-  const OtpVerifyScreen({super.key});
+  String phone;
+
+  OtpVerifyScreen(this.phone);
 
   @override
   State<OtpVerifyScreen> createState() => _OtpVerifyScreenState();
@@ -21,6 +24,10 @@ bool invalid = false;
 class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   @override
   Widget build(BuildContext context) {
+    String phone2 = "";
+    for (int i = 0; i < 7; i++) {
+      phone2 += widget.phone[i];
+    }
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -58,108 +65,111 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                 //   //   return
                 //   // },
                 // );
-                showGeneralDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    barrierLabel: MaterialLocalizations.of(context)
-                        .modalBarrierDismissLabel,
-                    barrierColor: Colors.black45,
-                    transitionDuration: const Duration(milliseconds: 200),
-                    pageBuilder: (BuildContext buildContext,
-                        Animation animation, Animation secondaryAnimation) {
-                      return Center(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 32),
-                          width: width - 39,
-                          // height: ,
-                          constraints: BoxConstraints(
-                              minHeight: height / 2.3, maxHeight: height / 2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset("assets/verifyVector.svg"),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Material(
-                                    color: Colors.white,
-                                    child: Text(
-                                      'Verification Successfull!',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                if (!invalid) {
+                  showGeneralDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      barrierLabel: MaterialLocalizations.of(context)
+                          .modalBarrierDismissLabel,
+                      barrierColor: Colors.black45,
+                      transitionDuration: const Duration(milliseconds: 200),
+                      pageBuilder: (BuildContext buildContext,
+                          Animation animation, Animation secondaryAnimation) {
+                        return Center(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 32),
+                            width: width - 39,
+                            // height: ,
+                            constraints: BoxConstraints(
+                                minHeight: height / 2.3, maxHeight: height / 2),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset("assets/verifyVector.svg"),
+                                    SizedBox(
+                                      height: 16,
                                     ),
-                                  ),
-                                  Material(
-                                    color: Colors.white,
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 8),
+                                    Material(
+                                      color: Colors.white,
                                       child: Text(
-                                        'Your Mobile Number is Successfully Verified. Enjoy App Benefits Once Again!',
+                                        'Verification Successfull!',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          color: Color(0xFF939EAA),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Material(
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (ctx) =>
-                                                BottomNavigationBarScreens()),
-                                        (route) => false);
-                                  },
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 35),
-                                    width: 281,
-                                    height: 55,
-                                    decoration: ShapeDecoration(
-                                      gradient: AppColors.primaryGradient,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(60),
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Okay',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
+                                          color: Colors.black,
+                                          fontSize: 24,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
                                     ),
-                                  ),
+                                    Material(
+                                      color: Colors.white,
+                                      child: Container(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 8),
+                                        child: Text(
+                                          'Your Mobile Number is Successfully Verified. Enjoy App Benefits Once Again!',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Color(0xFF939EAA),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              )
-                            ],
+                                Material(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (ctx) =>
+                                                  BottomNavigationBarScreens()),
+                                          (route) => false);
+                                    },
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 35),
+                                      width: 281,
+                                      height: 55,
+                                      decoration: ShapeDecoration(
+                                        gradient: AppColors.primaryGradient,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(60),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Okay',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    });
+                        );
+                      });
+                }
               },
               child: MainButton(context, "Verify"))),
       backgroundColor: Colors.white,
@@ -212,8 +222,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(right: 8),
-                      child: const Text(
-                        '+91-9907678***',
+                      child: Text(
+                        "+91-${phone2}***",
                         style: TextStyle(
                           color: Color(0xFF0A2472),
                           fontSize: 18,
@@ -295,7 +305,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                         onSubmit: (String verificationCode) {
                           setState(() {
                             filled = true;
-                            verificationCode == "1111"
+                            verificationCode != "1234"
                                 ? invalid = true
                                 : invalid = false;
                           });

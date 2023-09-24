@@ -11,9 +11,10 @@ import '../models/medical.dart';
 import '../models/pet.dart';
 import 'package:flutter/material.dart';
 
-Future<void> saveToken(String token) async {
+Future<void> saveToken(String token, String id) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('userToken', token);
+  await prefs.setString("id", id);
 }
 
 //Get Country flags

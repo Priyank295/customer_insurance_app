@@ -10,6 +10,7 @@ import 'package:customer_insurance_app/screens/editProfileScreen.dart';
 import 'package:customer_insurance_app/screens/languageSelectionScreen.dart';
 import 'package:customer_insurance_app/screens/marineInsurancePlanScreens/marineInsuranceScreen2.dart';
 import 'package:customer_insurance_app/screens/myClaimsScreen.dart';
+import 'package:customer_insurance_app/screens/otpVerifyScreen.dart';
 import 'package:customer_insurance_app/screens/registerScreen.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/conditions_screen.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/create_password_screen.dart';
@@ -108,9 +109,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)),
-      home: token.isNotEmpty
-          ? BottomNavigationBarScreens()
-          : SignUpRegisterScreen(),
+      home: token.isNotEmpty ? BottomNavigationBarScreens() : SplashScreen(),
       // initialRoute: LanguageSelectionScreen.languageSelectionScreen,
       routes: {
         BottomNavigationBarScreens.bottomNavScreens: (context) =>
