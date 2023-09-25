@@ -47,6 +47,9 @@ List<TextEditingController> dobList = [
 List<TextEditingController> conList = [
   TextEditingController(),
 ];
+List<SuggestionsBoxController> sugList = [
+  SuggestionsBoxController(),
+];
 
 TextEditingController _conditions = TextEditingController();
 
@@ -75,6 +78,7 @@ class _LifeInsuranceScreen2IfFamilyState
       nameList.add(TextEditingController());
       dobList.add(TextEditingController());
       conList.add(TextEditingController());
+      sugList.add(SuggestionsBoxController());
     });
 
     return List.generate(count, (_) => familyDetailsWidgets(context, _));
@@ -221,8 +225,8 @@ class _LifeInsuranceScreen2IfFamilyState
     );
   }
 
-  Widget CustomTypeheadTextField(
-      context, String name, String icon, TextEditingController _controller) {
+  Widget CustomTypeheadTextField(context, String name, String icon,
+      TextEditingController _controller, SuggestionsBoxController _sug) {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.symmetric(horizontal: 29.5),
@@ -232,9 +236,11 @@ class _LifeInsuranceScreen2IfFamilyState
 
         child: Form(
           child: TypeAheadFormField(
-            keepSuggestionsOnSuggestionSelected: true,
+            suggestionsBoxController: _sug,
+            // keepSuggestionsOnSuggestionSelected: true,
             hideKeyboard: true,
-            keepSuggestionsOnLoading: true,
+            // keepSuggestionsOnLoading: true,
+
             validator: (value) {
               if (value!.isEmpty) {
                 return "\u24D8 Please select ${"conditions".toLowerCase()} here";
@@ -243,14 +249,14 @@ class _LifeInsuranceScreen2IfFamilyState
             suggestionsBoxDecoration: SuggestionsBoxDecoration(
               color: Colors.white,
             ),
-            onSaved: (newValue) {
-              setState(() {
-                selectedSuggestions.add(newValue.toString());
-              });
-            },
+            // onSaved: (newValue) {
+            //   setState(() {
+            //     selectedSuggestions.add(newValue.toString());
+            //   });
+            // },
             textFieldConfiguration: TextFieldConfiguration(
-              enableSuggestions: true,
-              controller: _conditions,
+              // enableSuggestions: true,
+              controller: _controller,
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 18,
@@ -319,9 +325,15 @@ class _LifeInsuranceScreen2IfFamilyState
                   onChanged: (val) {
                     setState(() {
                       if (val) {
-                        selectedSuggestions.add(suggestion);
+                        setState(() {
+                          selectedSuggestions.add(suggestion);
+                          _sug.close();
+                        });
                       } else {
-                        selectedSuggestions.remove(suggestion);
+                        setState(() {
+                          selectedSuggestions.remove(suggestion);
+                          _sug.close();
+                        });
                       }
                       print(selectedSuggestions);
                     });
@@ -342,7 +354,9 @@ class _LifeInsuranceScreen2IfFamilyState
               print("hello");
               setState(() {
                 selectedSuggestions.add(suggestion);
+                _sug.close();
               });
+
               print(selectedSuggestions);
             },
           ),
@@ -433,7 +447,7 @@ class _LifeInsuranceScreen2IfFamilyState
           ),
         ),
         CustomTypeheadTextField(context, "Pre-Existing Condition",
-            "assets/downBlack.svg", conList[index]),
+            "assets/downBlack.svg", conList[index], sugList[index]),
       ],
     );
   }
