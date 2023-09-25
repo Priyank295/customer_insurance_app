@@ -212,7 +212,7 @@ class _PetInsuranceFormScreen2State extends State<PetInsuranceFormScreen2> {
                     'DRAFT',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Color(0x19EF7B00),
+                      color: Color(0xfff2255A4).withOpacity(.13),
                       fontSize: 80,
                       fontFamily: 'Nunito',
                       fontWeight: FontWeight.w400,

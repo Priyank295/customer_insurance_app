@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../../widgets/mainBtn.dart';
 import 'automativeInsuranceFormScreen2.dart';
@@ -11,6 +12,8 @@ class AutomativeInsuranceFormScreen1 extends StatefulWidget {
   State<AutomativeInsuranceFormScreen1> createState() =>
       _AutomativeInsuranceFormScreen1State();
 }
+
+ScreenshotController screenshotController = new ScreenshotController();
 
 class _AutomativeInsuranceFormScreen1State
     extends State<AutomativeInsuranceFormScreen1> {
@@ -103,10 +106,1128 @@ class _AutomativeInsuranceFormScreen1State
                     SizedBox(
                       height: 20,
                     ),
-                    SvgPicture.asset(
-                      "assets/automativeForm.svg",
-                      width: MediaQuery.of(context).size.width,
-                      // height: 540,
+                    Screenshot(
+                      controller: screenshotController,
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 6,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Policy No.",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 3,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  //Issue Date
+                                  Container(
+                                    width: width / 6,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Reg. Date",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  left: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  top: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  bottom: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                ),
+                                color: Colors.transparent,
+                              ),
+                              child: Row(children: [
+                                Container(
+                                  width: width / 4,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Colors.black,
+                                        width: .75,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Insurance Type",
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  left: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  top: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                ),
+                                color: Colors.transparent,
+                              ),
+                              child: Row(children: [
+                                Container(
+                                  width: width / 4,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Colors.black,
+                                        width: .75,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Insured Name",
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  left: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  top: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  bottom: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                ),
+                                color: Colors.transparent,
+                              ),
+                              child: Row(children: [
+                                Container(
+                                  width: width / 6,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Colors.black,
+                                        width: .75,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Address",
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Phone No.",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 3,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  //Issue Date
+                                  Container(
+                                    width: width / 6,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Beneficiary",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Sum Insured",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  right: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  left: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                ),
+                                color: Color(0xfffDBE9F5),
+                              ),
+                              child: Row(children: [
+                                Container(
+                                  width: width / 4,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Insurance Period",
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 9,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "From",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 2.5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  Container(
+                                    width: width / 9,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "To",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 6,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Plate No.",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 4,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  Container(
+                                    width: width / 3,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Year of Manufacture",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 4,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Registration No.",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 4.5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  Container(
+                                    width: width / 4,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "No. of Passengers",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 4.5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Vehicle Brand ",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 3.7,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  Container(
+                                    width: width / 6,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Engine No.",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 8,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Model",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 4,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  Container(
+                                    width: width / 5.5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Chassis No.",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 8,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Type",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 3.6,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  Container(
+                                    width: width / 5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Vehicle Color",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 7.5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Usage",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 3,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Geographical Area",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 5.5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Reviews",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Deductible",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 6,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Premium",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 3,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Mandatory Premium",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    bottom: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 2.5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Complimentory Premium",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  left: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  top: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                ),
+                                color: Colors.transparent,
+                              ),
+                              child: Row(children: [
+                                Container(
+                                  width: width / 3,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Colors.black,
+                                        width: .75,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Net Insurance Premium",
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  left: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  top: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                ),
+                                color: Colors.transparent,
+                              ),
+                              child: Row(children: [
+                                Container(
+                                  width: width / 5,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Colors.black,
+                                        width: .75,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Issuing Fees",
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    left: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                    top: BorderSide(
+                                        color: Colors.black, width: 0.75),
+                                  ),
+                                  color: Colors.transparent),
+                              child: Row(
+                                children: [
+                                  //policy
+                                  Container(
+                                    width: width / 7,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Stamps",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: width / 2.5,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                  ),
+
+                                  //Issue Date
+                                  Container(
+                                    width: width / 7,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                          right: BorderSide(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        color: Colors.transparent),
+                                    child: Center(
+                                      child: Text(
+                                        "Sales Tax",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  left: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  top: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                  bottom: BorderSide(
+                                      color: Colors.black, width: 0.75),
+                                ),
+                                color: Colors.transparent,
+                              ),
+                              child: Row(children: [
+                                Container(
+                                  width: width / 4,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Colors.black,
+                                        width: .75,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Total Premium",
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     Container(
                         margin: EdgeInsets.symmetric(vertical: 30),
@@ -138,7 +1259,7 @@ class _AutomativeInsuranceFormScreen1State
                         'DRAFT',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Color(0x19EF7B00),
+                          color: Color(0xfff2255A4).withOpacity(.13),
                           fontSize: 80,
                           fontFamily: 'Nunito',
                           fontWeight: FontWeight.w400,

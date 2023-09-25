@@ -234,6 +234,7 @@ class _LifeInsuranceScreen2IfFamilyState
           child: TypeAheadFormField(
             keepSuggestionsOnSuggestionSelected: true,
             hideKeyboard: true,
+            keepSuggestionsOnLoading: true,
             validator: (value) {
               if (value!.isEmpty) {
                 return "\u24D8 Please select ${"conditions".toLowerCase()} here";
@@ -242,7 +243,13 @@ class _LifeInsuranceScreen2IfFamilyState
             suggestionsBoxDecoration: SuggestionsBoxDecoration(
               color: Colors.white,
             ),
+            onSaved: (newValue) {
+              setState(() {
+                selectedSuggestions.add(newValue.toString());
+              });
+            },
             textFieldConfiguration: TextFieldConfiguration(
+              enableSuggestions: true,
               controller: _conditions,
               style: const TextStyle(
                 color: Colors.black,
@@ -251,7 +258,7 @@ class _LifeInsuranceScreen2IfFamilyState
                 fontWeight: FontWeight.w700,
               ),
               decoration: InputDecoration(
-                isDense: true,
+                // isDense: true,
                 suffixIconConstraints:
                     BoxConstraints(maxHeight: 65, maxWidth: 40),
                 suffixIcon: icon.length != 0
@@ -296,6 +303,7 @@ class _LifeInsuranceScreen2IfFamilyState
               return suggestions.where((fruit) =>
                   fruit.toLowerCase().contains(pattern.toLowerCase()));
             },
+            enabled: true,
             itemBuilder: (context, String suggestion) {
               return ListTile(
                 tileColor: Colors.transparent,
@@ -315,6 +323,7 @@ class _LifeInsuranceScreen2IfFamilyState
                       } else {
                         selectedSuggestions.remove(suggestion);
                       }
+                      print(selectedSuggestions);
                     });
                   },
                 ),
@@ -330,9 +339,11 @@ class _LifeInsuranceScreen2IfFamilyState
               );
             },
             onSuggestionSelected: (String suggestion) {
+              print("hello");
               setState(() {
                 selectedSuggestions.add(suggestion);
               });
+              print(selectedSuggestions);
             },
           ),
         ));
