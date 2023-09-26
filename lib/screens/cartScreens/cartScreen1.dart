@@ -120,11 +120,20 @@ class _CartScreen1State extends State<CartScreen1> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    SvgPicture.asset("assets/close4.svg")
+                                    GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: SvgPicture.asset(
+                                            "assets/close4.svg"))
                                   ],
                                 ),
                               ),
-                              Image.asset("assets/password.gif"),
+                              SvgPicture.asset(
+                                "assets/password2.svg",
+                                height: 150,
+                                width: 150,
+                              ),
                               SizedBox(
                                 height: 9,
                               ),
@@ -141,13 +150,17 @@ class _CartScreen1State extends State<CartScreen1> {
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                    Text(
-                                      'Please Enter Your Password to verify Yourself! It’s only for Your Security!',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w300,
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 30),
+                                      child: Text(
+                                        'Please Enter Your Password to verify Yourself! It’s only for Your Security!',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w300,
+                                        ),
                                       ),
                                     ),
                                     Container(

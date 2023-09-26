@@ -116,9 +116,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)),
-      home: token.isNotEmpty
-          ? BottomNavigationBarScreens()
-          : LifeInsuranceScreen2IfFamily(),
+      home: token.isNotEmpty ? BottomNavigationBarScreens() : CartScreen1(),
       // initialRoute: LanguageSelectionScreen.languageSelectionScreen,
       routes: {
         BottomNavigationBarScreens.bottomNavScreens: (context) =>
