@@ -17,6 +17,7 @@ import 'package:customer_insurance_app/screens/myClaimsScreen.dart';
 import 'package:customer_insurance_app/screens/officeInsurancePlanScreens/officeInsuranceFormScreen1.dart';
 import 'package:customer_insurance_app/screens/otpVerifyScreen.dart';
 import 'package:customer_insurance_app/screens/petInsurancePlanScreens/petInsuranceFormScreen1.dart';
+import 'package:customer_insurance_app/screens/profileScreen.dart';
 import 'package:customer_insurance_app/screens/registerScreen.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/conditions_screen.dart';
 import 'package:customer_insurance_app/screens/signUpScreens/create_password_screen.dart';
@@ -115,14 +116,16 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       translations: LocalString(), // your translations
       locale:
-          Locale('ar', 'AR'), // translations will be displayed in that locale
+          Locale('en', 'US'), // translations will be displayed in that locale
       title: "Insurance App",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)),
-      home: token.isNotEmpty
-          ? BottomNavigationBarScreens()
-          : LanguageSelectionScreen(),
+        textTheme: GoogleFonts.nunitoTextTheme(
+          Theme.of(context).textTheme.apply(fontSizeDelta: 18),
+        ),
+      ),
+      home:
+          token.isNotEmpty ? BottomNavigationBarScreens() : EditProfileScreen(),
       // initialRoute: LanguageSelectionScreen.languageSelectionScreen,
       routes: {
         BottomNavigationBarScreens.bottomNavScreens: (context) =>

@@ -1,4 +1,5 @@
 import 'package:customer_insurance_app/database/getdataApi.dart';
+import 'package:customer_insurance_app/widgets/custom_drop_down_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -197,6 +198,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     key: formKey,
                     child: Column(
                       children: [
+                        CustomDropDownTextField(
+                            context, "Choose your Language", (val) {}, [
+                          DropdownMenuItem(
+                            child: Text("English"),
+                            value: "English",
+                          ),
+                          DropdownMenuItem(
+                            child: Text("Arabic"),
+                            value: "Arabic",
+                          ),
+                        ]),
                         CustomTextField(
                             name: "Name",
                             icon: "",
