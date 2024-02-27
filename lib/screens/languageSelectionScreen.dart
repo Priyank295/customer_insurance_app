@@ -25,11 +25,13 @@ const List<Map<String, String>> languages = [
     "name": "Arabic",
     "icon": "assets/arabic.svg",
     "value": "0",
+    'language': 'ar_AR'
   },
   {
     "name": "English",
     "icon": "assets/english.svg",
     "value": "1",
+    'language': 'en_US'
   },
 ];
 
@@ -141,7 +143,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               SizedBox(
                 width: width,
                 child: Text(
-                  'Select Your Preferred Language',
+                  'select'.tr,
                   style: GoogleFonts.nunito(
                     color: Colors.black,
                     fontSize: 30,
@@ -177,7 +179,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                             onChanged: filterSearchResults,
                             cursorColor: AppColors.fontPrimaryColor,
                             decoration: InputDecoration(
-                              hintText: "Find a language",
+                              hintText: "find".tr,
                               hintStyle: GoogleFonts.nunito(
                                 color: AppColors.fontPrimaryColor,
                                 fontSize: 18,
@@ -204,6 +206,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     onTap: () {
                       setState(() {
                         selected = index;
+                        Get.updateLocale(Locale(filteredItems.isEmpty
+                            ? languages[index]['language'].toString()
+                            : filteredItems[index]['language'].toString()));
                       });
                     },
                     child: Container(
@@ -351,7 +356,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                                     builder: (ctx) => RegisterScreen()));
                           }
                         },
-                        child: MainButton(context, "Next"),
+                        child: MainButton(context, "next".tr),
                       ),
                     ),
                     GestureDetector(
@@ -367,7 +372,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Don’t have an account?',
+                            'have'.tr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFF939EAA),
@@ -379,7 +384,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                             width: 5,
                           ),
                           Text(
-                            'Sign Up',
+                            'signUp'.tr,
                             style: TextStyle(
                               color: Color(0xFF0A2472),
                               fontSize: 16,

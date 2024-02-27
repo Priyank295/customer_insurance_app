@@ -26,6 +26,7 @@ import 'package:customer_insurance_app/screens/signUpScreens/signup_profile_scre
 import 'package:customer_insurance_app/screens/signUpScreens/signup_register_screen.dart';
 import 'package:customer_insurance_app/screens/travelInsurancePlanScreens.dart/travelInsuranceFormScreen1.dart';
 import 'package:customer_insurance_app/screens/travelInsurancePlanScreens.dart/travelInsurancePlansScreen.dart';
+import 'package:customer_insurance_app/translation/LocaleString.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -112,11 +113,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: LocalString(), // your translations
+      locale:
+          Locale('ar', 'AR'), // translations will be displayed in that locale
       title: "Insurance App",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)),
-      home: token.isNotEmpty ? BottomNavigationBarScreens() : CartScreen1(),
+      home: token.isNotEmpty
+          ? BottomNavigationBarScreens()
+          : LanguageSelectionScreen(),
       // initialRoute: LanguageSelectionScreen.languageSelectionScreen,
       routes: {
         BottomNavigationBarScreens.bottomNavScreens: (context) =>
