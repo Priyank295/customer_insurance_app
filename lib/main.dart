@@ -1,5 +1,6 @@
 import 'package:customer_insurance_app/models/automative.dart';
 import 'package:customer_insurance_app/models/home.dart';
+import 'package:customer_insurance_app/models/medical.dart';
 import 'package:customer_insurance_app/models/user.dart';
 import 'package:customer_insurance_app/screens/LifeInsurancePlanScreens/lifeInsurancePlansScreen.dart';
 import 'package:customer_insurance_app/screens/accidentInsurancePlanScreens/accidentInsuranceFormScreen1.dart';
@@ -121,15 +122,18 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.nunitoTextTheme(
-          Theme.of(context).textTheme.apply(fontSizeDelta: 18),
+          Theme.of(context).textTheme.apply(),
         ),
       ),
-      home:
-          token.isNotEmpty ? BottomNavigationBarScreens() : EditProfileScreen(),
+      home: token.isNotEmpty
+          ? BottomNavigationBarScreens()
+          : MedicalInsuranceScreen2IfFamily(
+              medical: Medical(),
+            ),
       // initialRoute: LanguageSelectionScreen.languageSelectionScreen,
       routes: {
         BottomNavigationBarScreens.bottomNavScreens: (context) =>
-            const BottomNavigationBarScreens(),
+            BottomNavigationBarScreens(),
         HomeInsuranceScreen1.homeInsuranceRoute: (context) =>
             const HomeInsuranceScreen1(),
 

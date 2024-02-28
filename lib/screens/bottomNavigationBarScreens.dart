@@ -1,29 +1,26 @@
+import 'package:customer_insurance_app/screens/cartScreens/applyPromoScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import '../common/colors.dart';
+import '../providers/controllers.dart';
 import './policiesScreen.dart';
 import 'homeScreen.dart';
 import 'myPoliciesScreen.dart';
 import 'profileScreen.dart';
 
-class BottomNavigationBarScreens extends StatefulWidget {
+class BottomNavigationBarScreens extends StatelessWidget {
   static const bottomNavScreens = "/bottomNavScreens";
-  const BottomNavigationBarScreens({super.key});
+  BottomNavigationBarScreens({super.key});
 
-  @override
-  State<BottomNavigationBarScreens> createState() =>
-      _BottomNavigationBarScreensState();
-}
+  List<Widget> screens = [
+    HomeScreen(),
+    MyPoliciesScreen(),
+    ProfileScreen(),
+  ];
+  int _selectedIndex = 0;
 
-const List<Widget> screens = [
-  HomeScreen(),
-  MyPoliciesScreen(),
-  ProfileScreen(),
-];
-int _selectedIndex = 0;
-
-class _BottomNavigationBarScreensState
-    extends State<BottomNavigationBarScreens> {
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,50 +38,55 @@ class _BottomNavigationBarScreensState
             )
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-                onPressed: () {
-                  setState(() {
-                    _selectedIndex != 0 ? _selectedIndex = 0 : null;
-                  });
-                },
-                icon: SvgPicture.asset(
-                  "assets/home.svg",
-                  color: _selectedIndex == 0
-                      ? AppColors.vectorPrimaryColor
-                      : AppColors.vectorSecondaryColor,
-                )),
-            IconButton(
-                onPressed: () {
-                  setState(() {
-                    _selectedIndex != 1 ? _selectedIndex = 1 : null;
-                  });
-                },
-                icon: SvgPicture.asset(
-                  "assets/policy.svg",
-                  color: _selectedIndex == 1
-                      ? AppColors.vectorPrimaryColor
-                      : AppColors.vectorSecondaryColor,
-                )),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  _selectedIndex != 2 ? _selectedIndex = 2 : null;
-                });
-              },
-              icon: SvgPicture.asset(
-                "assets/profile.svg",
-                color: _selectedIndex == 2
-                    ? AppColors.vectorPrimaryColor
-                    : AppColors.vectorSecondaryColor,
-              ),
-            ),
-          ],
+        child: GetBuilder(
+          init: homeScreenController,
+          builder: (controller) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      controller.selectedIndex.value != 0
+                          ? controller.onTabTapped(0)
+                          : null;
+                    },
+                    icon: SvgPicture.asset(
+                      "assets/home.svg",
+                      color: controller.selectedIndex.value == 0
+                          ? AppColors.vectorPrimaryColor
+                          : AppColors.vectorSecondaryColor,
+                    )),
+                IconButton(
+                    onPressed: () {
+                      controller.selectedIndex.value != 1
+                          ? controller.onTabTapped(1)
+                          : null;
+                    },
+                    icon: SvgPicture.asset(
+                      "assets/policy.svg",
+                      color: controller.selectedIndex.value == 1
+                          ? AppColors.vectorPrimaryColor
+                          : AppColors.vectorSecondaryColor,
+                    )),
+                IconButton(
+                  onPressed: () {
+                    controller.selectedIndex.value != 2
+                        ? controller.onTabTapped(2)
+                        : null;
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/profile.svg",
+                    color: controller.selectedIndex.value == 2
+                        ? AppColors.vectorPrimaryColor
+                        : AppColors.vectorSecondaryColor,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
-      body: screens[_selectedIndex],
+      body: Obx(() => screens[homeScreenController.selectedIndex.value]),
     );
   }
 }

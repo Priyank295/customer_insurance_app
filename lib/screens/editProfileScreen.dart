@@ -14,84 +14,27 @@ import '../models/user.dart';
 import '../widgets/mainBtn.dart';
 import '../widgets/profilePictureWidget.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+class EditProfileScreen extends StatelessWidget {
+  // const EditProfileScreen({super.key});
 
-  @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
-}
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController gender = TextEditingController();
+  TextEditingController dob = TextEditingController();
+  TextEditingController mobile = TextEditingController();
+  TextEditingController occupation = TextEditingController();
+  TextEditingController country = TextEditingController();
+  TextEditingController city = TextEditingController();
+  TextEditingController district = TextEditingController();
+  TextEditingController road = TextEditingController();
+  TextEditingController house = TextEditingController();
+  TextEditingController placeToWork = TextEditingController();
+  TextEditingController nationalId = TextEditingController();
 
-TextEditingController name = TextEditingController();
-TextEditingController email = TextEditingController();
-TextEditingController gender = TextEditingController();
-TextEditingController dob = TextEditingController();
-TextEditingController mobile = TextEditingController();
-TextEditingController occupation = TextEditingController();
-TextEditingController country = TextEditingController();
-TextEditingController city = TextEditingController();
-TextEditingController district = TextEditingController();
-TextEditingController road = TextEditingController();
-TextEditingController house = TextEditingController();
-TextEditingController placeToWork = TextEditingController();
-TextEditingController nationalId = TextEditingController();
-
-class _EditProfileScreenState extends State<EditProfileScreen> {
   final formKey = GlobalKey<FormState>();
   bool allValidate = true;
   late User user;
   String selectedOption = '';
-
-  void showRadioDailog(context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          // title: Text('Select an option'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              RadioListTile(
-                title: Text('Male'),
-                value: 'Male',
-                groupValue: selectedOption,
-                onChanged: (value) {
-                  setState(() {
-                    selectedOption = value.toString();
-                    gender.text = selectedOption;
-                    // categoryEmpty = false;
-                    // isFilled = true;
-                    print(selectedOption);
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              RadioListTile(
-                title: Text('Female'),
-                value: 'Female',
-                groupValue: selectedOption,
-                onChanged: (value) {
-                  setState(() {
-                    selectedOption = value.toString();
-                    gender.text = selectedOption;
-
-                    // isFilled = true;
-                    print(selectedOption);
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +44,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 26),
           width: width,
           child: Column(
             children: [
@@ -209,155 +153,83 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             value: "Arabic",
                           ),
                         ]),
-                        CustomTextField(
-                            name: "Name",
-                            icon: "",
-                            needCalender: false,
-                            controller: name),
-                        CustomTextField(
-                          name: "Email ID",
-                          icon: "",
-                          controller: email,
-                          needCalender: false,
+                        CustomNormalTextField(
+                            context, "Name", (value) {}, name),
+                        CustomNormalTextField(
+                          context,
+                          "Email ID",
+                          (value) {},
+                          email,
                         ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 12.5),
-                          width: width,
-                          constraints: BoxConstraints(minHeight: 65),
-                          padding: EdgeInsets.symmetric(horizontal: 26),
-                          child: TextFormField(
-                            onTap: () {
-                              showRadioDailog(context);
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "\u24D8 Please Select Gender here";
-                              }
-                            },
-                            controller: gender,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              // fontFamily: 'Nunito',
-                              fontWeight: FontWeight.w700,
-                            ),
-                            decoration: InputDecoration(
-                              isDense: true,
-                              suffixIconConstraints:
-                                  BoxConstraints(maxHeight: 65, maxWidth: 40),
-                              suffixIcon: Container(
-                                width: 100,
-                                height: 65,
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    "assets/downBlack.svg",
-                                  ),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 20),
-                              label: Container(
-                                child: Text(
-                                  "Gender",
-                                  style: GoogleFonts.nunito(
-                                    color: Color(0xFF939EAA),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              errorStyle: TextStyle(
-                                color: Color(0xFFFF5353),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFFF5353),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10)),
-                              focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFFF5353),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                    width: 0.5,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff008EFF),
-                                    width: 0.5,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
+                        CustomDropDownTextField(context, "Gender", (p0) {}, [
+                          DropdownMenuItem(
+                            child: Text("Male"),
+                            value: "Male",
                           ),
-                        ),
-                        CustomTextField(
-                          name: "Birthdate (DD/MM/YYYY)",
-                          icon: "assets/calender.svg",
-                          controller: dob,
-                          needCalender: true,
-                        ),
-                        CustomTextField(
-                          name: "Mobile No.",
-                          icon: "assets/lock.svg",
-                          controller: mobile,
-                          needCalender: false,
-                        ),
-                        CustomTextField(
-                          name: "Occupation",
-                          icon: "assets/downBlack.svg",
-                          controller: occupation,
-                          needCalender: false,
-                        ),
-                        CustomTextField(
-                          name: "Country",
-                          icon: "assets/downBlack.svg",
-                          controller: country,
-                          needCalender: false,
-                        ),
-                        CustomTextField(
-                          name: "City",
-                          icon: "assets/downBlack.svg",
-                          controller: city,
-                          needCalender: false,
-                        ),
-                        CustomTextField(
-                          name: "District",
-                          icon: "assets/downBlack.svg",
-                          controller: district,
-                          needCalender: false,
-                        ),
-                        CustomTextField(
-                          name: "National ID",
-                          icon: "",
-                          controller: nationalId,
-                          needCalender: false,
-                        ),
-                        CustomTextField(
-                          name: "Road Name",
-                          icon: "assets/downBlack.svg",
-                          controller: road,
-                          needCalender: false,
-                        ),
-                        CustomTextField(
-                          name: "House No./Building Name",
-                          icon: "assets/downBlack.svg",
-                          controller: house,
-                          needCalender: false,
-                        ),
-                        CustomTextField(
-                          name: "Place of Work",
-                          icon: "",
-                          controller: placeToWork,
-                          needCalender: false,
-                        ),
+                          DropdownMenuItem(
+                            child: Text("Female"),
+                            value: "Female",
+                          )
+                        ]),
+                        CustomDobTextField(
+                            context, "BirthDate (DD/MM/YYY)", (value) {}, dob),
+                        CustomNormalTextField(
+                            context, "Mobile No.", (value) {}, mobile),
+                        CustomDropDownTextField(
+                            context, "Nationality", (p0) {}, [
+                          DropdownMenuItem(
+                            child: Text("Bangladeshi"),
+                            value: "Bangladeshi",
+                          ),
+                          DropdownMenuItem(
+                            child: Text("Indian"),
+                            value: "Indian",
+                          )
+                        ]),
+                        CustomDropDownTextField(
+                            context, "Occupation", (p0) {}, [
+                          DropdownMenuItem(
+                            child: Text("Student"),
+                            value: "Student",
+                          ),
+                          DropdownMenuItem(
+                            child: Text("Teacher"),
+                            value: "Teacher",
+                          )
+                        ]),
+                        CustomDropDownTextField(
+                            context, "Marital Status", (p0) {}, [
+                          DropdownMenuItem(
+                            child: Text("Single"),
+                            value: "Single",
+                          ),
+                          DropdownMenuItem(
+                            child: Text("Married"),
+                            value: "Married",
+                          ),
+                          DropdownMenuItem(
+                            child: Text("Divorced"),
+                            value: "Divorced",
+                          ),
+                          DropdownMenuItem(
+                            child: Text("Windowed"),
+                            value: "Windowed",
+                          )
+                        ]),
+                        CustomNormalTextField(
+                            context, "Country", (value) {}, country),
+                        CustomNormalTextField(
+                            context, "City", (value) {}, city),
+                        CustomNormalTextField(
+                            context, "District", (value) {}, district),
+                        CustomNormalTextField(
+                            context, "National ID", (value) {}, nationalId),
+                        CustomNormalTextField(
+                            context, "Road Name", (value) {}, road),
+                        CustomNormalTextField(context,
+                            "House No./Building Name", (value) {}, house),
+                        CustomNormalTextField(
+                            context, "Place of Work", (value) {}, placeToWork),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 26),
                           child: Container(

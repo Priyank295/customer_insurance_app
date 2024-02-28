@@ -1,5 +1,6 @@
 import 'package:customer_insurance_app/database/apiIntegration.dart';
 import 'package:customer_insurance_app/screens/editProfileScreen.dart';
+import 'package:customer_insurance_app/widgets/custom_drop_down_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,22 +35,6 @@ bool allValidate = true;
 DateTime selectedDate = DateTime.now();
 
 class _MedicalInsuranceScreen4State extends State<MedicalInsuranceScreen4> {
-  Future<void> _selectDate(
-      BuildContext context, TextEditingController controller) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime(2004),
-      firstDate: DateTime(1980),
-      lastDate: DateTime(2004),
-    );
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-        controller.text = DateFormat.yMd().format(selectedDate);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -88,50 +73,6 @@ class _MedicalInsuranceScreen4State extends State<MedicalInsuranceScreen4> {
                       selectedOption1 = value.toString();
                       _any.text = selectedOption1;
                       print(selectedOption1);
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    }
-
-    void showRadioDailog2(
-      context,
-    ) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            // title: Text('Select an option'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                RadioListTile(
-                  title: Text('Male'),
-                  value: 'Male',
-                  groupValue: selectedOption2,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedOption2 = value.toString();
-                      _gender.text = selectedOption2;
-                      print(selectedOption2);
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
-                RadioListTile(
-                  title: Text('Female'),
-                  value: 'Female',
-                  groupValue: selectedOption2,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedOption2 = value.toString();
-                      _gender.text = selectedOption2;
-                      print(selectedOption2);
                     });
                     Navigator.pop(context);
                   },
@@ -242,6 +183,7 @@ class _MedicalInsuranceScreen4State extends State<MedicalInsuranceScreen4> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 26),
             width: width,
             child: Column(
               children: [
@@ -281,176 +223,26 @@ class _MedicalInsuranceScreen4State extends State<MedicalInsuranceScreen4> {
                         const SizedBox(
                           height: 25,
                         ),
-                        customTextField(
-                            context, "Policyholder*", _policy, false),
-                        customTextField(
-                            context, "National ID No*", _nat, false),
-                        customTextField(context, "ID No.*", _id, false),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 26),
-                          margin: EdgeInsets.symmetric(vertical: 7.5),
-                          child: Column(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                constraints: BoxConstraints(minHeight: 65),
-                                child: TextFormField(
-                                  onTap: () {
-                                    _selectDate(context, _dob);
-                                  },
-                                  controller: _dob,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    // fontFamily: 'Nunito',
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 30, vertical: 20),
-                                    label: Container(
-                                      child: Text(
-                                        "Date Of Birth*",
-                                        style: GoogleFonts.nunito(
-                                          color: Color(0xFF939EAA),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                    errorStyle: TextStyle(
-                                      color: Color(0xFFFF5353),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFFF5353),
-                                          width: 1,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color:
-                                              AppColors.regularTextFieldColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFFF5353),
-                                          width: 1,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: AppColors.focusTextFieldColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        CustomNormalTextField(
+                            context, "Policyholder*", (value) {}, _policy),
+                        CustomNormalTextField(
+                            context, "National ID*", (value) {}, _nat),
+                        CustomNormalTextField(
+                            context, "ID Number*", (value) {}, _id),
+                        CustomDobTextField(
+                            context, "Date Of Birth*", (value) {}, _dob),
+                        CustomDropDownTextField(context, "Gender*", (p0) {}, [
+                          const DropdownMenuItem(
+                            child: Text("Male"),
+                            value: "Male",
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 26),
-                          margin: EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                constraints: BoxConstraints(minHeight: 65),
-                                child: TextFormField(
-                                  onTap: () {
-                                    showRadioDailog2(context);
-                                  },
-                                  keyboardType: TextInputType.none,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "\u24D8 Please select ${"this".toLowerCase()} option";
-                                    }
-                                  },
-                                  controller: _gender,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    // fontFamily: 'Nunito',
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  decoration: InputDecoration(
-                                    suffixIconConstraints: BoxConstraints(
-                                        maxHeight: 65, maxWidth: 40),
-                                    suffixIcon: Container(
-                                      width: 100,
-                                      height: 65,
-                                      child: Center(
-                                        child: SvgPicture.asset(
-                                          "assets/downBlack.svg",
-                                          color: Color(0xFF939EAA),
-                                        ),
-                                      ),
-                                    ),
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 30, vertical: 20),
-                                    label: Container(
-                                      child: Text(
-                                        "Gender*",
-                                        style: GoogleFonts.nunito(
-                                          color: Color(0xFF939EAA),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                    errorStyle: TextStyle(
-                                      color: Color(0xFFFF5353),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFFF5353),
-                                          width: 1,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFDBE9F5),
-                                          width: 1,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFFF5353),
-                                          width: 1,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFDBE9F5),
-                                          width: 1,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          const DropdownMenuItem(
+                            child: Text("Female"),
+                            value: "Female",
                           ),
-                        ),
+                        ]),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 26),
+                          // padding: EdgeInsets.symmetric(horizontal: 26),
                           margin: EdgeInsets.symmetric(vertical: 10),
                           child: Column(
                             children: [
@@ -541,7 +333,7 @@ class _MedicalInsuranceScreen4State extends State<MedicalInsuranceScreen4> {
                         ),
                         selectedOption1 == 'Yes'
                             ? Container(
-                                padding: EdgeInsets.symmetric(horizontal: 26),
+                                // padding: EdgeInsets.symmetric(horizontal: 26),
                                 margin: EdgeInsets.symmetric(vertical: 10),
                                 width: MediaQuery.of(context).size.width,
                                 // height: 65,

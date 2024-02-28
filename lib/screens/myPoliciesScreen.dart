@@ -264,7 +264,7 @@ class _MyPoliciesScreenState extends State<MyPoliciesScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "noSearch.gif",
+                        "assets/noSearch.gif",
                         height: 189,
                         width: 189,
                       ),

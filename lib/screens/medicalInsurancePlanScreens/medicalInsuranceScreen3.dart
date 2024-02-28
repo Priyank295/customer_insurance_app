@@ -1,4 +1,5 @@
 import 'package:customer_insurance_app/screens/editProfileScreen.dart';
+import 'package:customer_insurance_app/widgets/custom_drop_down_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -226,16 +227,10 @@ class _MedicalInsuranceScreen3State extends State<MedicalInsuranceScreen3> {
                       selectedOption == 'Yes'
                           ? Column(
                               children: [
-                                CustomTextField(
-                                    name: "Company Name",
-                                    icon: "",
-                                    controller: _cname,
-                                    needCalender: false),
-                                CustomTextField(
-                                    name: "Expiry Date",
-                                    icon: "",
-                                    controller: _expiry,
-                                    needCalender: true)
+                                CustomNormalTextField(context, "Company Name",
+                                    (value) {}, _cname),
+                                CustomDobTextField(context, "Expire Date",
+                                    (value) {}, controller)
                               ],
                             )
                           : Container(),
