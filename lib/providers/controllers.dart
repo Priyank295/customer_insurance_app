@@ -45,6 +45,7 @@ class HomeScreenController extends GetxController {
 
 class MedicalIfFamilyController extends GetxController {
   RxList<String> selectedItems = <String>[].obs;
+  var familyFields = 1.obs;
 
   void onItemClicked(String item) {
     if (selectedItems.contains(item)) {
@@ -52,6 +53,11 @@ class MedicalIfFamilyController extends GetxController {
     } else {
       selectedItems.add(item);
     }
+    update();
+  }
+
+  void increment() {
+    familyFields++;
     update();
   }
 }

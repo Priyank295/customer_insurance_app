@@ -1,7 +1,9 @@
 import 'package:customer_insurance_app/database/getdataApi.dart';
+import 'package:customer_insurance_app/providers/controllers.dart';
 import 'package:customer_insurance_app/widgets/custom_drop_down_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +32,18 @@ class EditProfileScreen extends StatelessWidget {
   TextEditingController house = TextEditingController();
   TextEditingController placeToWork = TextEditingController();
   TextEditingController nationalId = TextEditingController();
+  CustomDropDownController genderContoller =
+      Get.put(CustomDropDownController());
+  CustomDropDownController languageContoller =
+      Get.put(CustomDropDownController());
+  CustomDropDownController ocupationContoller =
+      Get.put(CustomDropDownController());
+  CustomDropDownController meritalController =
+      Get.put(CustomDropDownController());
+  CustomDropDownController nationalityController =
+      Get.put(CustomDropDownController());
+  CustomDobTextFieldController dobController =
+      Get.put(CustomDobTextFieldController());
 
   final formKey = GlobalKey<FormState>();
   bool allValidate = true;
@@ -143,16 +157,20 @@ class EditProfileScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         CustomDropDownTextField(
-                            context, "Choose your Language", (val) {}, [
-                          DropdownMenuItem(
-                            child: Text("English"),
-                            value: "English",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Arabic"),
-                            value: "Arabic",
-                          ),
-                        ]),
+                            context,
+                            "Choose your Language",
+                            (val) {},
+                            [
+                              DropdownMenuItem(
+                                child: Text("English"),
+                                value: "English",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Arabic"),
+                                value: "Arabic",
+                              ),
+                            ],
+                            languageContoller),
                         CustomNormalTextField(
                             context, "Name", (value) {}, name),
                         CustomNormalTextField(
@@ -161,61 +179,78 @@ class EditProfileScreen extends StatelessWidget {
                           (value) {},
                           email,
                         ),
-                        CustomDropDownTextField(context, "Gender", (p0) {}, [
-                          DropdownMenuItem(
-                            child: Text("Male"),
-                            value: "Male",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Female"),
-                            value: "Female",
-                          )
-                        ]),
-                        CustomDobTextField(
-                            context, "BirthDate (DD/MM/YYY)", (value) {}, dob),
+                        CustomDropDownTextField(
+                            context,
+                            "Gender",
+                            (p0) {},
+                            [
+                              DropdownMenuItem(
+                                child: Text("Male"),
+                                value: "Male",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Female"),
+                                value: "Female",
+                              )
+                            ],
+                            genderContoller),
+                        CustomDobTextField(context, "BirthDate (DD/MM/YYY)",
+                            (value) {}, dob, dobController!),
                         CustomNormalTextField(
                             context, "Mobile No.", (value) {}, mobile),
                         CustomDropDownTextField(
-                            context, "Nationality", (p0) {}, [
-                          DropdownMenuItem(
-                            child: Text("Bangladeshi"),
-                            value: "Bangladeshi",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Indian"),
-                            value: "Indian",
-                          )
-                        ]),
+                            context,
+                            "Nationality",
+                            (p0) {},
+                            [
+                              DropdownMenuItem(
+                                child: Text("Bangladeshi"),
+                                value: "Bangladeshi",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Indian"),
+                                value: "Indian",
+                              )
+                            ],
+                            nationalityController),
                         CustomDropDownTextField(
-                            context, "Occupation", (p0) {}, [
-                          DropdownMenuItem(
-                            child: Text("Student"),
-                            value: "Student",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Teacher"),
-                            value: "Teacher",
-                          )
-                        ]),
+                            context,
+                            "Occupation",
+                            (p0) {},
+                            [
+                              DropdownMenuItem(
+                                child: Text("Student"),
+                                value: "Student",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Teacher"),
+                                value: "Teacher",
+                              )
+                            ],
+                            ocupationContoller),
                         CustomDropDownTextField(
-                            context, "Marital Status", (p0) {}, [
-                          DropdownMenuItem(
-                            child: Text("Single"),
-                            value: "Single",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Married"),
-                            value: "Married",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Divorced"),
-                            value: "Divorced",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Windowed"),
-                            value: "Windowed",
-                          )
-                        ]),
+                            context,
+                            "Marital Status",
+                            (p0) {},
+                            [
+                              DropdownMenuItem(
+                                child: Text("Single"),
+                                value: "Single",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Married"),
+                                value: "Married",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Divorced"),
+                                value: "Divorced",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Windowed"),
+                                value: "Windowed",
+                              )
+                            ],
+                            meritalController),
                         CustomNormalTextField(
                             context, "Country", (value) {}, country),
                         CustomNormalTextField(

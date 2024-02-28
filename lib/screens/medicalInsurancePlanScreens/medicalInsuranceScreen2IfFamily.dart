@@ -46,6 +46,11 @@ List<String> suggestions = [
   'Encephalitis',
 ];
 
+List<MedicalIfFamilyController> medicalFamilyControllerList = [
+  Get.put(
+    MedicalIfFamilyController(),
+  ),
+];
 List<TextEditingController> nameList = [
   TextEditingController(),
 ];
@@ -54,6 +59,10 @@ List<TextEditingController> dobList = [
 ];
 List<TextEditingController> conList = [
   TextEditingController(),
+];
+
+List<CustomDobTextFieldController> getxList = [
+  CustomDobTextFieldController(),
 ];
 
 List<Family> rowData = [];
@@ -73,6 +82,7 @@ class _MedicalInsuranceScreen2IfFamilyState
       nameList.add(TextEditingController());
       dobList.add(TextEditingController());
       conList.add(TextEditingController());
+      medicalFamilyControllerList.add(Get.put(MedicalIfFamilyController()));
     });
 
     return List.generate(count, (_) => familyDetailsWidgets(context, _));
@@ -138,8 +148,8 @@ class _MedicalInsuranceScreen2IfFamilyState
                 ),
               ))),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: SafeArea(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Container(
             width: width,
             child: Column(
@@ -245,7 +255,7 @@ class _MedicalInsuranceScreen2IfFamilyState
 
         child: Form(
           child: GetBuilder(
-              init: MedicalIfFamilyController(),
+              init: medicalIfFamilyController,
               builder: (controller) {
                 return TypeAheadFormField(
                   keepSuggestionsOnSuggestionSelected: true,
@@ -369,20 +379,22 @@ class _MedicalInsuranceScreen2IfFamilyState
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           familyFields > 1
-              ? Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 26.5),
-                  child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          familyFields--;
-                        });
-                      },
-                      child: SvgPicture.asset("assets/close3.svg")),
-                )
+              ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      familyFields--;
+                    });
+                  },
+                  child: SvgPicture.asset("assets/close3.svg"))
               : Container(),
           CustomNormalTextField(context, "Name", (value) {}, nameList[index]),
           CustomDobTextField(
-              context, "Birthdate (DD/MM/YYY)", (value) {}, dobList[index]),
+            context,
+            "Birthdate (DD/MM/YYY)",
+            (value) {},
+            dobList[index],
+            getxList[index],
+          ),
           CustomTypeheadTextField(context, "Pre-Existing Condition",
               "assets/downBlack.svg", conList[index]),
         ],

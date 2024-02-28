@@ -1,8 +1,10 @@
 import 'package:customer_insurance_app/database/apiIntegration.dart';
+import 'package:customer_insurance_app/providers/controllers.dart';
 import 'package:customer_insurance_app/screens/editProfileScreen.dart';
 import 'package:customer_insurance_app/widgets/custom_drop_down_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -28,6 +30,10 @@ TextEditingController _policy = TextEditingController();
 TextEditingController _nat = TextEditingController();
 TextEditingController _id = TextEditingController();
 TextEditingController _dob = TextEditingController();
+CustomDobTextFieldController _dobController =
+    Get.put(CustomDobTextFieldController());
+CustomDropDownController _genderController =
+    Get.put(CustomDropDownController());
 String selectedOption1 = '';
 String selectedOption2 = '';
 final formKey = GlobalKey<FormState>();
@@ -229,18 +235,23 @@ class _MedicalInsuranceScreen4State extends State<MedicalInsuranceScreen4> {
                             context, "National ID*", (value) {}, _nat),
                         CustomNormalTextField(
                             context, "ID Number*", (value) {}, _id),
-                        CustomDobTextField(
-                            context, "Date Of Birth*", (value) {}, _dob),
-                        CustomDropDownTextField(context, "Gender*", (p0) {}, [
-                          const DropdownMenuItem(
-                            child: Text("Male"),
-                            value: "Male",
-                          ),
-                          const DropdownMenuItem(
-                            child: Text("Female"),
-                            value: "Female",
-                          ),
-                        ]),
+                        CustomDobTextField(context, "Date Of Birth*",
+                            (value) {}, _dob, _dobController),
+                        CustomDropDownTextField(
+                            context,
+                            "Gender*",
+                            (p0) {},
+                            [
+                              const DropdownMenuItem(
+                                child: Text("Male"),
+                                value: "Male",
+                              ),
+                              const DropdownMenuItem(
+                                child: Text("Female"),
+                                value: "Female",
+                              ),
+                            ],
+                            _genderController),
                         Container(
                           // padding: EdgeInsets.symmetric(horizontal: 26),
                           margin: EdgeInsets.symmetric(vertical: 10),

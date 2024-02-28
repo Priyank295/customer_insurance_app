@@ -1,7 +1,9 @@
+import 'package:customer_insurance_app/providers/controllers.dart';
 import 'package:customer_insurance_app/screens/editProfileScreen.dart';
 import 'package:customer_insurance_app/widgets/custom_drop_down_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/colors.dart';
@@ -25,6 +27,8 @@ TextEditingController _cname = TextEditingController();
 TextEditingController _expiry = TextEditingController();
 TextEditingController controller = new TextEditingController();
 String selectedOption = '';
+CustomDobTextFieldController dobGetxController =
+    Get.put(CustomDobTextFieldController());
 
 class _MedicalInsuranceScreen3State extends State<MedicalInsuranceScreen3> {
   @override
@@ -230,7 +234,7 @@ class _MedicalInsuranceScreen3State extends State<MedicalInsuranceScreen3> {
                                 CustomNormalTextField(context, "Company Name",
                                     (value) {}, _cname),
                                 CustomDobTextField(context, "Expire Date",
-                                    (value) {}, controller)
+                                    (value) {}, controller, dobGetxController)
                               ],
                             )
                           : Container(),

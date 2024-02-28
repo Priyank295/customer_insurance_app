@@ -5,9 +5,12 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_widget_cache.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget CustomDropDownTextField(BuildContext context, String name,
-    void Function(String) onChanged, List<DropdownMenuItem> items) {
-  CustomDropDownController controller = Get.put(CustomDropDownController());
+Widget CustomDropDownTextField(
+    BuildContext context,
+    String name,
+    void Function(String) onChanged,
+    List<DropdownMenuItem> items,
+    CustomDropDownController controller) {
   return GetX(builder: (CustomDropDownController controller) {
     return Container(
       // padding: EdgeInsets.symmetric(horizontal: 26),
@@ -182,12 +185,15 @@ Widget CustomNormalTextField(BuildContext context, String name,
   );
 }
 
-Widget CustomDobTextField(BuildContext context, String name,
-    void Function(String value) OnChanged, TextEditingController controller) {
+Widget CustomDobTextField(
+    BuildContext context,
+    String name,
+    void Function(String value) OnChanged,
+    TextEditingController controller,
+    CustomDobTextFieldController getxController) {
   final width = MediaQuery.of(context).size.width;
   final height = MediaQuery.of(context).size.height;
-  CustomDobTextFieldController dobController =
-      Get.put(CustomDobTextFieldController());
+  getxController = Get.put(CustomDobTextFieldController());
   return Obx(() {
     return Container(
       // padding: EdgeInsets.symmetric(horizontal: 26),
@@ -210,12 +216,12 @@ Widget CustomDobTextField(BuildContext context, String name,
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
                     context: context,
-                    initialDate: dobController.selectedDate.value,
+                    initialDate: getxController.selectedDate.value,
                     initialDatePickerMode: DatePickerMode.day,
                     firstDate: DateTime(1950),
                     lastDate: DateTime.now());
                 if (picked != null) {
-                  dobController.onDateChanged(picked);
+                  getxController.onDateChanged(picked);
                 }
               },
               style: TextStyle(

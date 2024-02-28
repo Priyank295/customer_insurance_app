@@ -127,9 +127,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: token.isNotEmpty
           ? BottomNavigationBarScreens()
-          : MedicalInsuranceScreen2IfFamily(
-              medical: Medical(),
-            ),
+          : MedicalInsuranceScreen2IfFamily(medical: Medical()),
       // initialRoute: LanguageSelectionScreen.languageSelectionScreen,
       routes: {
         BottomNavigationBarScreens.bottomNavScreens: (context) =>
